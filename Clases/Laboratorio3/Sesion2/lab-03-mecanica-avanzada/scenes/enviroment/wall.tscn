@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://p2nylcbowfkq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r030d"]
+size = Vector2(14, 52.5)
+
+[node name="Wall" type="StaticBody2D" unique_id=281758771]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=144029995]
+position = Vector2(54, 77.5)
+scale = Vector2(1, 2)
+shape = SubResource("RectangleShape2D_r030d")
+
+[node name="Polygon2D" type="Polygon2D" parent="." unique_id=68541714]
+position = Vector2(47, 25)
+scale = Vector2(14.000001, 52.499996)
+polygon = PackedVector2Array(0, 0, 1, 0, 1, 2, 0, 2)
