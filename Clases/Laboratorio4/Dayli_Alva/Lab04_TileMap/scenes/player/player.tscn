@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://cie28t1csn1wt"]
+
+[ext_resource type="Script" uid="uid://dtq0p1crh7jsg" path="res://scripts/player.gd" id="1_8afob"]
+[ext_resource type="Texture2D" uid="uid://c2a8mm8t2lksa" path="res://assets/images/Dey_Rousse_idle.png" id="2_dovo2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e6yk2"]
+size = Vector2(36, 78)
+
+[node name="Player" type="CharacterBody2D" unique_id=693228329 groups=["player"]]
+script = ExtResource("1_8afob")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=279640480]
+position = Vector2(4.6491623e-06, 5.066395e-07)
+scale = Vector2(0.056640625, 0.04947917)
+texture = ExtResource("2_dovo2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=951677584]
+position = Vector2(-1, -1)
+shape = SubResource("RectangleShape2D_e6yk2")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1972989682]
+limit_left = -159
+limit_top = -109
+limit_right = 1501
+limit_bottom = 933
+position_smoothing_enabled = true
+position_smoothing_speed = 6.0
