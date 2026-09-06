@@ -19,7 +19,7 @@ Convencido de que el dios Illapa está detrás de la tragedia, Kuya emprende un 
 A medida que avanza, Kuya descubre que Illapa no fue el responsable de la destrucción. La verdadera amenaza está relacionada con el desequilibrio entre los seres humanos y la naturaleza. Kuya tendrá que dejar de lado su deseo de venganza y comprender el significado del ayni, basado en la reciprocidad y la cooperación.
 
 ### 3. Género
-**RPG, Acción y Aventura 2D**
+**ACTION RPG 2D**
 
 Se eligió este género porque el jugador podrá desplazarse libremente por los mapas, explorar diferentes escenarios, combatir enemigos, recolectar objetos, superar obstáculos y enfrentarse a jefes. Además, permite representar los paisajes andinos mediante
 diferentes capas y generar profundidad visual.
