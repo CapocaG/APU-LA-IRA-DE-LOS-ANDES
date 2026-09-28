@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="AttackData" format=3 uid="uid://djo4qle5psle"]
+
+[ext_resource type="Script" uid="uid://t36byndb10sc" path="res://scripts/combat/attack_data.gd" id="1_5igny"]
+
+[resource]
+script = ExtResource("1_5igny")
+metadata/_custom_type_script = "uid://t36byndb10sc"
