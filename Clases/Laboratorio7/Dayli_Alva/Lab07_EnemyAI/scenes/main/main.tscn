@@ -1,0 +1,73 @@
+[gd_scene format=3 uid="uid://bdhh8no88ij77"]
+
+[ext_resource type="PackedScene" uid="uid://cie28t1csn1wt" path="res://scenes/player/player.tscn" id="1_hyk8p"]
+[ext_resource type="PackedScene" uid="uid://bqcr8oqpc4cik" path="res://scenes/collectibles/collectible.tscn" id="1_iuonh"]
+[ext_resource type="Script" uid="uid://c8y25iwbcj65e" path="res://scripts/main.gd" id="1_k2fmo"]
+
+[sub_resource type="FontVariation" id="FontVariation_6q06x"]
+
+[node name="Main" type="Node2D" unique_id=366150468]
+script = ExtResource("1_k2fmo")
+
+[node name="Collectible8" parent="." unique_id=1144035274 instance=ExtResource("1_iuonh")]
+position = Vector2(800, 250)
+points = 20
+
+[node name="Collectible7" parent="." unique_id=1213986928 instance=ExtResource("1_iuonh")]
+position = Vector2(100, 550)
+points = 10
+
+[node name="Collectible6" parent="." unique_id=147195755 instance=ExtResource("1_iuonh")]
+position = Vector2(1050, 550)
+points = 50
+
+[node name="Collectible5" parent="." unique_id=1741942927 instance=ExtResource("1_iuonh")]
+position = Vector2(700, 400)
+points = 20
+
+[node name="Collectible4" parent="." unique_id=649704307 instance=ExtResource("1_iuonh")]
+position = Vector2(300, 500)
+points = 10
+
+[node name="Collectible3" parent="." unique_id=1191378029 instance=ExtResource("1_iuonh")]
+position = Vector2(900, 150)
+points = 50
+
+[node name="Collectible2" parent="." unique_id=2023486215 instance=ExtResource("1_iuonh")]
+position = Vector2(500, 200)
+points = 20
+
+[node name="Player" parent="." unique_id=693228329 instance=ExtResource("1_hyk8p")]
+position = Vector2(47, 157)
+
+[node name="Collectible" parent="." unique_id=1585535275 instance=ExtResource("1_iuonh")]
+position = Vector2(200, 150)
+points = 20
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=570423738]
+
+[node name="ScoreLabel" type="Label" parent="CanvasLayer" unique_id=2115269462]
+offset_left = 8.0
+offset_top = 4.0
+offset_right = 143.0
+offset_bottom = 46.0
+theme_override_font_sizes/font_size = 30
+text = "Puntos: 0"
+
+[node name="RemainingLabel" type="Label" parent="CanvasLayer" unique_id=1521465222]
+offset_left = 7.0
+offset_top = 39.0
+offset_right = 183.0
+offset_bottom = 81.0
+theme_override_font_sizes/font_size = 30
+text = "Restantes: 8"
+
+[node name="VictoryLabel" type="Label" parent="CanvasLayer" unique_id=141602012]
+offset_left = 558.0
+offset_top = 285.0
+offset_right = 771.0
+offset_bottom = 343.0
+theme_override_colors/font_color = Color(0.81960785, 0.17254902, 0, 0.99607843)
+theme_override_fonts/font = SubResource("FontVariation_6q06x")
+theme_override_font_sizes/font_size = 42
+text = "¡VICTORIA!"
