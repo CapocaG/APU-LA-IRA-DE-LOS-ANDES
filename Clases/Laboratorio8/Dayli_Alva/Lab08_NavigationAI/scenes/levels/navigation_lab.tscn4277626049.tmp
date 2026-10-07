@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://cw4cysanta3n5"]
+
+[ext_resource type="PackedScene" uid="uid://c703v8p13ifti" path="res://scenes/environment/wall.tscn" id="1_n5fet"]
+[ext_resource type="PackedScene" uid="uid://cie28t1csn1wt" path="res://scenes/player/player.tscn" id="2_c1sq8"]
+[ext_resource type="PackedScene" uid="uid://b4tt2jyggf0rl" path="res://scenes/enemies/enemy.tscn" id="3_yiby5"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_e6yk2"]
+vertices = PackedVector2Array(1438.8984, 861, -81.96875, 861, -79.03125, -28.007813, 1430.0938, -30.976563)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-89, -38, 1440, -41, 1449, 871, -92, 871)])
+
+[node name="NavigationLab" type="Node2D" unique_id=533596133]
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=356784495]
+navigation_polygon = SubResource("NavigationPolygon_e6yk2")
+
+[node name="WorldVisuals" type="Node2D" parent="." unique_id=964595462]
+
+[node name="StaticObstacles" type="Node2D" parent="." unique_id=499680523]
+
+[node name="Wall20" parent="StaticObstacles" unique_id=1243092019 instance=ExtResource("1_n5fet")]
+position = Vector2(489, -100)
+scale = Vector2(5.3, 1)
+
+[node name="Wall21" parent="StaticObstacles" unique_id=1060227732 instance=ExtResource("1_n5fet")]
+position = Vector2(-112, 310)
+rotation = 1.5707964
+scale = Vector2(3, 1)
+
+[node name="Wall22" parent="StaticObstacles" unique_id=1167449781 instance=ExtResource("1_n5fet")]
+position = Vector2(1500, 317)
+rotation = 1.5707964
+scale = Vector2(3, 1)
+
+[node name="Wall23" parent="StaticObstacles" unique_id=1461978361 instance=ExtResource("1_n5fet")]
+position = Vector2(499, 893)
+scale = Vector2(5.28, 1)
+
+[node name="PlayerTarget" type="Node2D" parent="." unique_id=1732118842]
+
+[node name="Player" parent="PlayerTarget" unique_id=693228329 instance=ExtResource("2_c1sq8")]
+position = Vector2(993, 565)
+max_speed = 280.0
+acceleration = 1700.0
+deceleration = 1900.0
+gravity = 1500.0
+jump_velocity = -540.0
+jump_cut_multiplier = 0.45
+coyote_time = 0.12
+jump_buffer_time = 0.12
+wall_slide_speed = 110.0
+wall_jump_horizontal_speed = 320.0
+wall_jump_vertical_speed = -480.0
+dash_speed = 700.0
+dash_duration = 0.16
+dash_cooldown = 0.45
+
+[node name="Enemies" type="Node2D" parent="." unique_id=2024522180]
+
+[node name="Enemy" parent="Enemies" unique_id=1955206811 instance=ExtResource("3_yiby5")]
+position = Vector2(131, 167)
+
+[node name="DynamicObstacles" type="Node2D" parent="." unique_id=1217743088]
+
+[node name="DebugUI" type="CanvasLayer" parent="." unique_id=657358777]
