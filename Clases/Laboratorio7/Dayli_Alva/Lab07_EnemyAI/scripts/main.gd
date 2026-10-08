@@ -7,7 +7,6 @@ var remaining: int = 0
 @onready var remaining_label: Label = $CanvasLayer/RemainingLabel
 @onready var victory_label: Label = $CanvasLayer/VictoryLabel
 
-
 func _ready() -> void:
 	var collectibles = get_tree().get_nodes_in_group("collectible")
 	remaining = collectibles.size()
@@ -20,7 +19,6 @@ func _ready() -> void:
 	_update_score()
 	_update_remaining()
 
-
 func _on_collectible_collected(points: int) -> void:
 	score += points
 	remaining -= 1
@@ -31,10 +29,8 @@ func _on_collectible_collected(points: int) -> void:
 	if remaining == 0:
 		victory_label.visible = true
 
-
 func _update_score() -> void:
 	score_label.text = "Puntos: %d" % score
-
 
 func _update_remaining() -> void:
 	remaining_label.text = "Restantes: %d" % remaining

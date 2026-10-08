@@ -1,9 +1,5 @@
 extends CharacterBody2D
 
-# =========================================================
-# ANIMACIÓN Y MÁQUINA DE ESTADOS 
-# =========================================================
-
 @onready var animated_sprite: AnimatedSprite2D = $Visuals/AnimatedSprite2D
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var animation_state_machine: AnimationNodeStateMachinePlayback = animation_tree.get("parameters/playback")
@@ -31,56 +27,30 @@ enum PlayerState {
 
 var current_state: PlayerState = PlayerState.IDLE
 
-
-# =========================================================
-# MOVIMIENTO HORIZONTAL
-# =========================================================
-
 @export_category("Horizontal Movement")
 @export var max_speed: float = 280.0
 @export var acceleration: float = 1700.0
 @export var deceleration: float = 1900.0
-
-
-# =========================================================
-# SALTO
-# =========================================================
 
 @export_category("Jump")
 @export var gravity: float = 1500.0
 @export var jump_velocity: float = -540.0
 @export var jump_cut_multiplier: float = 0.45
 
-
-# =========================================================
-# ASISTENCIA DE SALTO
-# =========================================================
-
 @export_category("Jump Assist")
 @export var coyote_time: float = 0.12
 
 var coyote_timer: float = 0.0
-
 @export var jump_buffer_time: float = 0.12
 
 var jump_buffer_timer: float = 0.0
 var jumps_remaining: int = 1
 var was_on_floor: bool = true
 
-
-# =========================================================
-# PARED
-# =========================================================
-
 @export_category("Wall")
 @export var wall_slide_speed: float = 110.0
 @export var wall_jump_horizontal_speed: float = 320.0
 @export var wall_jump_vertical_speed: float = -480.0
-
-
-# =========================================================
-# DASH
-# =========================================================
 
 @export_category("Dash")
 @export var dash_speed: float = 700.0
@@ -94,11 +64,6 @@ var dash_timer: float = 0.0
 var dash_cooldown_timer: float = 0.0
 
 var facing_direction: float = 1.0
-
-
-# =========================================================
-# PROCESO PRINCIPAL
-# =========================================================
 
 func _physics_process(delta: float) -> void:
 	if current_state == PlayerState.DEAD:
@@ -134,17 +99,14 @@ func _physics_process(delta: float) -> void:
 		if not was_on_floor:
 			$AnimationPlayer.play("land_squash")
 	
-
 	was_on_floor = is_on_floor()
-	
 	
 func _try_attack() -> void:
 	if not can_attack:
 		return
 
 	if Input.is_action_just_pressed("attack"):
-		_change_state(PlayerState.ATTACK)
-		
+		_change_state(PlayerState.ATTACK)		
 
 func _enable_attack_hitbox() -> void:
 	sword_hitbox.begin_attack()
@@ -162,18 +124,9 @@ func _on_animation_finished() -> void:
 		else:
 			_change_state(PlayerState.FALL)
 
-# =========================================================
-# GRAVEDAD
-# =========================================================
-
 func _apply_gravity(delta: float) -> void:
 	if not is_on_floor():
 		velocity.y += gravity * delta
-
-
-# =========================================================
-# MOVIMIENTO HORIZONTAL
-# =========================================================
 
 func _update_horizontal_movement(delta: float) -> void:
 
@@ -191,20 +144,13 @@ func _update_horizontal_movement(delta: float) -> void:
 		)
 
 	else:
-
 		velocity.x = move_toward(
 			velocity.x,
 			0.0,
 			deceleration * delta
 		)
 
-
-# =========================================================
-# COYOTE TIME
-# =========================================================
-
 func _update_coyote_time(delta: float) -> void:
-
 	if is_on_floor():
 		coyote_timer = coyote_time
 	else:
@@ -213,53 +159,30 @@ func _update_coyote_time(delta: float) -> void:
 			0.0
 		)
 
-
-# =========================================================
-# JUMP BUFFER
-# =========================================================
-
 func _update_jump_buffer(delta: float) -> void:
-
 	if Input.is_action_just_pressed("jump"):
 		jump_buffer_timer = jump_buffer_time
-
 	else:
 		jump_buffer_timer = max(
 			jump_buffer_timer - delta,
 			0.0
 		)
-
-
-# =========================================================
-# SALTO
-# =========================================================
-
+		
 func _try_jump() -> void:
-
 	if jump_buffer_timer > 0.0:
-
 		if coyote_timer > 0.0:
-
 			velocity.y = jump_velocity
-
 			jump_buffer_timer = 0.0
 			coyote_timer = 0.0
 			jumps_remaining = 1
 
 		elif jumps_remaining > 0:
-
 			velocity.y = jump_velocity
 
 			jump_buffer_timer = 0.0
 			jumps_remaining -= 1
-
-
-# =========================================================
-# CORTAR SALTO
-# =========================================================
-
+			
 func _apply_jump_cut() -> void:
-
 	if (
 		Input.is_action_just_released("jump")
 		and velocity.y < 0.0
@@ -267,13 +190,7 @@ func _apply_jump_cut() -> void:
 
 		velocity.y *= jump_cut_multiplier
 
-
-# =========================================================
-# WALL SLIDE
-# =========================================================
-
 func _apply_wall_slide() -> void:
-
 	if (
 		is_on_wall()
 		and not is_on_floor()
@@ -284,11 +201,6 @@ func _apply_wall_slide() -> void:
 			velocity.y,
 			wall_slide_speed
 		)
-
-
-# =========================================================
-# WALL JUMP
-# =========================================================
 
 func _try_wall_jump() -> void:
 
@@ -303,13 +215,7 @@ func _try_wall_jump() -> void:
 		velocity.x = wall_normal.x * wall_jump_horizontal_speed
 		velocity.y = wall_jump_vertical_speed
 
-
-# =========================================================
-# INICIAR DASH
-# =========================================================
-
 func _try_start_dash() -> void:
-
 	if (
 		Input.is_action_just_pressed("dash")
 		and dash_cooldown_timer <= 0.0
@@ -325,13 +231,7 @@ func _try_start_dash() -> void:
 		dash_timer = dash_duration
 		dash_cooldown_timer = dash_cooldown
 
-
-# =========================================================
-# ACTUALIZAR DASH
-# =========================================================
-
 func _update_dash(delta: float) -> void:
-
 	dash_cooldown_timer = max(
 		dash_cooldown_timer - delta,
 		0.0
@@ -348,11 +248,6 @@ func _update_dash(delta: float) -> void:
 	if dash_timer <= 0.0:
 		is_dashing = false
 
-
-# =========================================================
-# ESTADOS
-# =========================================================
-
 func _update_state() -> void:
 	if current_state in [
 		PlayerState.ATTACK,
@@ -362,13 +257,10 @@ func _update_state() -> void:
 		return
 
 	var new_state: PlayerState
-
-	# DASH tiene prioridad
 	if is_dashing:
 
 		new_state = PlayerState.DASH
 
-	# WALL SLIDE
 	elif (
 		is_on_wall()
 		and not is_on_floor()
@@ -376,46 +268,28 @@ func _update_state() -> void:
 	):
 
 		new_state = PlayerState.WALL_SLIDE
-
 	# JUMP / FALL
 	elif not is_on_floor():
-
 		if velocity.y < 0.0:
 			new_state = PlayerState.JUMP
 		else:
 			new_state = PlayerState.FALL
-
 	# RUN
 	elif abs(velocity.x) > 10.0:
-
 		new_state = PlayerState.RUN
-
 	# IDLE
 	else:
-
 		new_state = PlayerState.IDLE
-
+		
 	_change_state(new_state)
 
-
-# =========================================================
-# CAMBIAR DE ESTADO
-# =========================================================
-
 func _change_state(new_state: PlayerState) -> void:
-
-	# Si ya estamos en ese estado, no reiniciamos la animación
 	if current_state == new_state:
 		return
-
 	current_state = new_state
 	_update_state_label()
 
 	_play_state_animation()
-
-# =========================================================
-# StateLabel con color diferente por estado
-# =========================================================	
 	
 func _update_state_label() -> void:
 	state_label.text = PlayerState.keys()[current_state]
@@ -440,50 +314,32 @@ func _update_state_label() -> void:
 		PlayerState.DEAD:
 			state_label.modulate = Color.DARK_GRAY
 
-
-# =========================================================
-# REPRODUCIR ANIMACIÓN SEGÚN ESTADO
-# =========================================================
-
 func _play_state_animation() -> void:
 	match current_state:
 		PlayerState.IDLE:
 			animated_sprite.play("idle")
-
 		PlayerState.RUN:
 			animated_sprite.play("run")
-
 		PlayerState.JUMP:
 			animated_sprite.play("jump")
-
 		PlayerState.FALL:
 			animated_sprite.play("fall")
-
 		PlayerState.WALL_SLIDE:
 			animated_sprite.play("wall_slide")
-
 		PlayerState.DASH:
-			animated_sprite.play("dash")
-			
+			animated_sprite.play("dash")		
 		PlayerState.ATTACK:
 			animated_sprite.play("attack")
 			animation_player.play("attack")
-
 		PlayerState.HURT:
 			animated_sprite.play("hurt")
-
 		PlayerState.DEAD:
 			velocity = Vector2.ZERO
 			sword_hitbox.end_attack()
 			animated_sprite.play("dead")
 			set_process_input(false)
 
-# =========================================================
-# DIRECCIÓN DEL PERSONAJE
-# =========================================================
-
 func _update_facing() -> void:
-
 	var direction := Input.get_axis(
 		"move_left",
 		"move_right"
@@ -502,7 +358,6 @@ func _ready() -> void:
 	hurtbox.hit_received.connect(_on_hit_received)
 	health.died.connect(_on_died)
 
-
 func _on_hit_received(
 	attack: AttackData,
 	direction: Vector2
@@ -518,7 +373,6 @@ func _on_hit_received(
 	_change_state(PlayerState.HURT)
 	_play_invulnerability_feedback(attack.invulnerability_time)
 
-
 func _on_died() -> void:
 	if current_state == PlayerState.DEAD:
 		return
@@ -529,7 +383,6 @@ func _on_died() -> void:
 	hurtbox.set_deferred("monitoring", false)
 	hurtbox.set_deferred("monitorable", false)
 	_change_state(PlayerState.DEAD)
-
 
 func _update_hurt_state(delta: float) -> void:
 	_apply_gravity(delta)

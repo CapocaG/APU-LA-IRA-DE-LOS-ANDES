@@ -67,10 +67,8 @@ var idle_time_left: float = 0.0
 var attack_cooldown_left: float = 0.0
 var hurt_time_left: float = 0.0
 
-
 func _ready() -> void:
 	home_position = global_position
-
 	if patrol_point_b != null:
 		current_patrol_target = patrol_point_b
 
@@ -85,7 +83,6 @@ func _ready() -> void:
 
 	_enter_state(current_state)
 	_update_debug_label()
-
 
 func _physics_process(delta: float) -> void:
 	if current_state == EnemyState.DEAD:
@@ -102,57 +99,42 @@ func _physics_process(delta: float) -> void:
 	match current_state:
 		EnemyState.IDLE:
 			_update_idle(delta)
-
 		EnemyState.PATROL:
 			_update_patrol(delta)
-
 		EnemyState.CHASE:
 			_update_chase(delta)
-
 		EnemyState.ATTACK:
 			_update_attack(delta)
-
 		EnemyState.HURT:
 			_update_hurt(delta)
-
 		EnemyState.RETURN:
 			_update_return(delta)
 
 	move_and_slide()
 	_update_debug_label()
 
-
 func _change_state(new_state: EnemyState) -> void:
 	if new_state == current_state:
 		return
 
 	_exit_state(current_state)
-
 	current_state = new_state
-
 	_enter_state(current_state)
-
 
 func _enter_state(state: EnemyState) -> void:
 	match state:
 		EnemyState.IDLE:
 			_enter_idle()
-
 		EnemyState.PATROL:
 			_enter_patrol()
-
 		EnemyState.CHASE:
 			_enter_chase()
-
 		EnemyState.ATTACK:
 			_enter_attack()
-
 		EnemyState.HURT:
 			_enter_hurt()
-
 		EnemyState.RETURN:
 			_enter_return()
-
 		EnemyState.DEAD:
 			_enter_dead()
 
@@ -162,11 +144,6 @@ func _exit_state(state: EnemyState) -> void:
 		animation_player.stop()
 		hitbox.end_attack()
 
-
-# -------------------------
-# PERCEPTION
-# -------------------------
-
 func _on_detection_body_entered(body: Node2D) -> void:
 	if not body.is_in_group("player"):
 		return
@@ -174,13 +151,11 @@ func _on_detection_body_entered(body: Node2D) -> void:
 	player = body as CharacterBody2D
 	player_in_detection_area = true
 
-
 func _on_detection_body_exited(body: Node2D) -> void:
 	if body != player:
 		return
 
 	player_in_detection_area = false
-
 
 func _on_attack_range_body_entered(body: Node2D) -> void:
 	if body == player or body.is_in_group("player"):
@@ -188,11 +163,9 @@ func _on_attack_range_body_entered(body: Node2D) -> void:
 			player = body as CharacterBody2D
 		player_in_attack_range = true
 
-
 func _on_attack_range_body_exited(body: Node2D) -> void:
 	if body == player:
 		player_in_attack_range = false
-
 
 func _has_line_of_sight_to_player() -> bool:
 	if player == null:
@@ -212,7 +185,6 @@ func _has_line_of_sight_to_player() -> bool:
 
 	return sight_ray.get_collider() == player
 
-
 func _update_perception(delta: float) -> void:
 	if _has_line_of_sight_to_player():
 		last_known_player_position = player.global_position
@@ -223,7 +195,6 @@ func _update_perception(delta: float) -> void:
 			0.0
 		)
 
-
 func _can_start_chase() -> bool:
 	return (
 		player != null
@@ -231,15 +202,9 @@ func _can_start_chase() -> bool:
 		and _has_line_of_sight_to_player()
 	)
 
-
-# -------------------------
-# MOVEMENT
-# -------------------------
-
 func _apply_gravity(delta: float) -> void:
 	if not is_on_floor():
 		velocity.y += gravity * delta
-
 
 func _move_horizontally_toward(
 	target_x: float,
@@ -251,13 +216,11 @@ func _move_horizontally_toward(
 
 	_update_facing(direction)
 
-
 func _should_turn_around() -> bool:
 	return (
 		not floor_ahead_ray.is_colliding()
 		or wall_ahead_ray.is_colliding()
 	)
-
 
 func _switch_patrol_target() -> void:
 	if current_patrol_target == patrol_point_a:
@@ -265,15 +228,12 @@ func _switch_patrol_target() -> void:
 	else:
 		current_patrol_target = patrol_point_a
 
-
 func _update_facing(direction: float) -> void:
 	if direction == 0.0:
 		return
 
 	var facing_left := direction < 0.0
-
 	animated_sprite.flip_h = facing_left
-
 	var sensor_sign := -1.0 if facing_left else 1.0
 
 	wall_ahead_ray.target_position.x = (
@@ -291,16 +251,10 @@ func _update_facing(direction: float) -> void:
 		* sensor_sign
 	)
 
-
-# -------------------------
-# IDLE
-# -------------------------
-
 func _enter_idle() -> void:
 	velocity.x = 0.0
 	idle_time_left = idle_duration
 	animated_sprite.play("idle")
-
 
 func _update_idle(delta: float) -> void:
 	velocity.x = 0.0
@@ -314,14 +268,8 @@ func _update_idle(delta: float) -> void:
 	if idle_time_left <= 0.0:
 		_change_state(EnemyState.PATROL)
 
-
-# -------------------------
-# PATROL
-# -------------------------
-
 func _enter_patrol() -> void:
 	animated_sprite.play("walk")
-
 
 func _update_patrol(_delta: float) -> void:
 	if _can_start_chase():
@@ -350,14 +298,8 @@ func _update_patrol(_delta: float) -> void:
 		_switch_patrol_target()
 		_change_state(EnemyState.IDLE)
 
-
-# -------------------------
-# CHASE
-# -------------------------
-
 func _enter_chase() -> void:
 	animated_sprite.play("run")
-
 
 func _update_chase(_delta: float) -> void:
 	if player == null:
@@ -387,15 +329,9 @@ func _update_chase(_delta: float) -> void:
 		chase_speed
 	)
 
-
-# -------------------------
-# ATTACK
-# -------------------------
-
 func _enter_attack() -> void:
 	velocity.x = 0.0
 	_start_attack()
-
 
 func _update_attack(_delta: float) -> void:
 	velocity.x = 0.0
@@ -417,7 +353,6 @@ func _update_attack(_delta: float) -> void:
 	if attack_cooldown_left <= 0.0:
 		_start_attack()
 
-
 func _start_attack() -> void:
 	if attack_cooldown_left > 0.0:
 		return
@@ -427,18 +362,11 @@ func _start_attack() -> void:
 	animated_sprite.play("attack")
 	animation_player.play("attack")
 
-
 func _enable_attack_hitbox() -> void:
 	hitbox.begin_attack()
 
-
 func _disable_attack_hitbox() -> void:
 	hitbox.end_attack()
-
-
-# -------------------------
-# HURT
-# -------------------------
 
 func _on_hit_received(
 	_attack: AttackData,
@@ -453,12 +381,10 @@ func _on_hit_received(
 
 	_change_state(EnemyState.HURT)
 
-
 func _enter_hurt() -> void:
 	animation_player.stop()
 	hitbox.end_attack()
 	animated_sprite.play("hurt")
-
 
 func _update_hurt(delta: float) -> void:
 	hurt_time_left -= delta
@@ -471,14 +397,8 @@ func _update_hurt(delta: float) -> void:
 	else:
 		_change_state(EnemyState.RETURN)
 
-
-# -------------------------
-# RETURN
-# -------------------------
-
 func _enter_return() -> void:
 	animated_sprite.play("walk")
-
 
 func _update_return(_delta: float) -> void:
 	if _can_start_chase():
@@ -496,14 +416,8 @@ func _update_return(_delta: float) -> void:
 		velocity.x = 0.0
 		_change_state(EnemyState.IDLE)
 
-
-# -------------------------
-# DEAD
-# -------------------------
-
 func _on_died() -> void:
 	_change_state(EnemyState.DEAD)
-
 
 func _enter_dead() -> void:
 	velocity = Vector2.ZERO
@@ -519,11 +433,6 @@ func _enter_dead() -> void:
 
 	animated_sprite.play("dead")
 	_update_debug_label()
-
-
-# -------------------------
-# DEBUG
-# -------------------------
 
 func _update_debug_label() -> void:
 	$StateDebugLabel.text = EnemyState.keys()[current_state]
