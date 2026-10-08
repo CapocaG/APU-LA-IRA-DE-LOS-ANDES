@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://hv50vgf5hcvc"
-path="res://.godot/imported/Tilemap_color3.png-0d77d3969e83243c2c21e63914c9d1d4.ctex"
+uid="uid://lgb4gy0ndcgx"
+path="res://.godot/imported/arbusto.png-dded77367f7a53d306b81577d5ea6808.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Tilemap_color3.png"
-dest_files=["res://.godot/imported/Tilemap_color3.png-0d77d3969e83243c2c21e63914c9d1d4.ctex"]
+source_file="res://Assets/Arboles_Arbustos/arbusto.png"
+dest_files=["res://.godot/imported/arbusto.png-dded77367f7a53d306b81577d5ea6808.ctex"]
 
 [params]
 

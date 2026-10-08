@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cs0bdjgg7xocy"
-path="res://.godot/imported/Frame_Amaru.png-b82f465334a654d6edbd3ed75502f56a.ctex"
+uid="uid://ckqnbx01dj26q"
+path="res://.godot/imported/Archery.png-2018230a374bd84fc314b859dc86aae0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Frame_Amaru.png"
-dest_files=["res://.godot/imported/Frame_Amaru.png-b82f465334a654d6edbd3ed75502f56a.ctex"]
+source_file="res://Assets/casas/Archery.png"
+dest_files=["res://.godot/imported/Archery.png-2018230a374bd84fc314b859dc86aae0.ctex"]
 
 [params]
 
