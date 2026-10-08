@@ -11,9 +11,7 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	position.x += direction * move_speed * delta
-
 	if position.x >= start_position.x + move_distance:
 		direction = -1.0
-
 	elif position.x <= start_position.x:
 		direction = 1.0
