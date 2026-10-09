@@ -45,6 +45,7 @@
 [ext_resource type="Texture2D" uid="uid://dmt1nkxsdijxm" path="res://Assets/casas/House_Destroyed.png" id="30_t51ir"]
 [ext_resource type="Texture2D" uid="uid://4lm3ni10so2v" path="res://Assets/objetos/Wood_Tower_Blue.png" id="31_d6d7a"]
 [ext_resource type="Texture2D" uid="uid://bdrixegwbq15w" path="res://Assets/objetos/Wood_Tower_InConstruction.png" id="32_lilx5"]
+[ext_resource type="PackedScene" uid="uid://cwe7owmorcybi" path="res://scenes/player/player.tscn" id="46_v0tij"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_i166f"]
 texture = ExtResource("1_nbgty")
@@ -3517,3 +3518,5 @@ tile_set = SubResource("TileSet_tjjhq")
 [node name="Casas" type="TileMapLayer" parent="." unique_id=1756696944]
 tile_map_data = PackedByteArray("AADl//X/AQAAAAAAAADr/wgAAAAAAAAAAADp/wgABQAAAAAAAADn/wgABQAAAAAAAADp/woABQAAAAAAAADn/woAAgAAAAAAAADm/wgAAgAAAAAAAADk/wgAAgAAAAAAAADj/wgABgAAAAAAAADi//X/BgAAAAAAAADo//X/AgAAAAAAAADl//P/AgAAAAAAAADo/wgAAgAAAAAAAADv/wAAAQAAAAAAAAD1//T/AgAAAAAAAADz//T/CAAAAAAAAAAPAPT/CAAAAAAAAAAQAPT/CAAAAAAAAAASAAAACAAAAAAAAAAYAAYACAAAAAAAAAAMAAQACAAAAAAAAADr/wsACAAAAAAAAAAYAPH/DgAAAAAAAAAHAAMAEAAAAAAAAAAAAPb/EAAAAAAAAADm/wIAEAAAAAAAAAD5/w0AEAAAAAAAAAAUAAsAEAAAAAAAAAAAAPL/EAAAAAAAAAAUAAkAEQAAAAAAAAAJAAMAEQAAAAAAAAADAP7/EQAAAAAAAAD2/wYAEQAAAAAAAADh/w4AEQAAAAAAAADn//3/EQAAAAAAAADn//n/EQAAAAAAAADm//3/CQAAAAAAAADm//n/CQAAAAAAAAAKAAQACQAAAAAAAAATAAkACQAAAAAAAAATAAEACQAAAAAAAAARAPT/CQAAAAAAAAAWAPT/CQAAAAAAAAAWAPP/CQAAAAAAAAAKAPX/CQAAAAAAAAA=")
 tile_set = SubResource("TileSet_u840f")
+
+[node name="Player" parent="." unique_id=893648857 instance=ExtResource("46_v0tij")]
