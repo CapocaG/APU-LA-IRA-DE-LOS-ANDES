@@ -1,0 +1,103 @@
+[gd_scene format=3 uid="uid://dadhqxoh8an4t"]
+
+[ext_resource type="FontFile" uid="uid://31jst86mgp48" path="res://Assets/fonts/PirataOne-Regular.ttf" id="1_vlcgc"]
+[ext_resource type="Texture2D" uid="uid://d0poumisynabh" path="res://Assets/ui/buttons/Apu_Button_Normal.png" id="2_wdrgs"]
+[ext_resource type="Texture2D" uid="uid://c45v5g3q1kir8" path="res://Assets/ui/buttons/Apu_Button_Pressed.png" id="3_fm5rf"]
+[ext_resource type="Texture2D" uid="uid://r60tuvihij35" path="res://Assets/ui/buttons/Apu_Button_Hover.png" id="4_w63p6"]
+
+[node name="EscenaFinal" type="Control" unique_id=1991709043]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=337710637]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.46666667)
+
+[node name="VB" type="VBoxContainer" parent="." unique_id=1237519779]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 90
+alignment = 1
+
+[node name="Label" type="Label" parent="VB" unique_id=1836434017]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.69411767)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_constants/shadow_outline_size = 8
+theme_override_fonts/font = ExtResource("1_vlcgc")
+theme_override_font_sizes/font_size = 70
+text = "Game Over"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Botones" type="HBoxContainer" parent="VB" unique_id=34903188]
+layout_mode = 2
+theme_override_constants/separation = 60
+alignment = 1
+
+[node name="Replay" type="TextureButton" parent="VB/Botones" unique_id=877673767]
+custom_minimum_size = Vector2(280, 70)
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("2_wdrgs")
+texture_pressed = ExtResource("3_fm5rf")
+texture_hover = ExtResource("4_w63p6")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="VB/Botones/Replay" unique_id=1643542841]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.69411767)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_constants/shadow_outline_size = 8
+theme_override_fonts/font = ExtResource("1_vlcgc")
+theme_override_font_sizes/font_size = 30
+text = "Replay"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Menu" type="TextureButton" parent="VB/Botones" unique_id=792042310]
+custom_minimum_size = Vector2(280, 70)
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("2_wdrgs")
+texture_pressed = ExtResource("3_fm5rf")
+texture_hover = ExtResource("4_w63p6")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="VB/Botones/Menu" unique_id=1486953190]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.69411767)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_constants/shadow_outline_size = 8
+theme_override_fonts/font = ExtResource("1_vlcgc")
+theme_override_font_sizes/font_size = 30
+text = "Menu"
+horizontal_alignment = 1
+vertical_alignment = 1
