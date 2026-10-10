@@ -11,13 +11,19 @@ config_version=5
 [application]
 
 config/name="Nuevo Proyecto de Juego"
+run/main_scene="uid://c2hcfukyuq8tn"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [display]
 
+<<<<<<< HEAD
+window/size/viewport_width=1280
+window/size/viewport_height=720
+=======
 window/size/viewport_width=1920
 window/size/viewport_height=1080
+>>>>>>> origin/main
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 

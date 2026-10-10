@@ -1,0 +1,158 @@
+[gd_scene format=3 uid="uid://bkxe1krdhnjvx"]
+
+[ext_resource type="Texture2D" uid="uid://d0poumisynabh" path="res://Assets/ui/buttons/Apu_Button_Normal.png" id="1_c2n5p"]
+[ext_resource type="Script" uid="uid://cj6x0evhjpl33" path="res://scripts/main/menu.gd" id="1_f4111"]
+[ext_resource type="Texture2D" uid="uid://p68wbwa03qnp" path="res://Assets/ui/logo/logo_apu.png" id="2_a3sb7"]
+[ext_resource type="Texture2D" uid="uid://c45v5g3q1kir8" path="res://Assets/ui/buttons/Apu_Button_Pressed.png" id="2_w6y0u"]
+[ext_resource type="PackedScene" uid="uid://cs2sdr4v0x3j2" path="res://scenes/main/background_menu.tscn" id="2_ykjm8"]
+[ext_resource type="Texture2D" uid="uid://r60tuvihij35" path="res://Assets/ui/buttons/Apu_Button_Hover.png" id="3_cx0sj"]
+[ext_resource type="FontFile" uid="uid://31jst86mgp48" path="res://Assets/fonts/PirataOne-Regular.ttf" id="4_w6y0u"]
+[ext_resource type="AudioStream" uid="uid://b7xkxukvss770" path="res://Assets/audio/click.mp3" id="8_qmr2i"]
+
+[node name="Menu" type="Control" unique_id=4800779]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_f4111")
+
+[node name="backgroundMenu" parent="." unique_id=1976722648 instance=ExtResource("2_ykjm8")]
+position = Vector2(688, 352)
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=555085239]
+layout_mode = 0
+offset_left = 53.0
+offset_top = 72.0
+offset_right = 413.0
+offset_bottom = 264.0
+texture = ExtResource("2_a3sb7")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1346695184]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 80.0
+offset_right = 400.0
+offset_bottom = 800.0
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="NuevoJuego" type="TextureButton" parent="VBoxContainer" unique_id=130298814]
+custom_minimum_size = Vector2(280, 70)
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("1_c2n5p")
+texture_pressed = ExtResource("2_w6y0u")
+texture_hover = ExtResource("3_cx0sj")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="VBoxContainer/NuevoJuego" unique_id=1392304268]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.69411767)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_constants/shadow_outline_size = 8
+theme_override_fonts/font = ExtResource("4_w6y0u")
+theme_override_font_sizes/font_size = 30
+text = "Nuevo Juego"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Continuar" type="TextureButton" parent="VBoxContainer" unique_id=1101681086]
+custom_minimum_size = Vector2(280, 70)
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("1_c2n5p")
+texture_pressed = ExtResource("2_w6y0u")
+texture_hover = ExtResource("3_cx0sj")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="VBoxContainer/Continuar" unique_id=1279452618]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.69411767)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_constants/shadow_outline_size = 8
+theme_override_fonts/font = ExtResource("4_w6y0u")
+theme_override_font_sizes/font_size = 30
+text = "Continuar"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Opciones" type="TextureButton" parent="VBoxContainer" unique_id=1683772081]
+custom_minimum_size = Vector2(280, 70)
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("1_c2n5p")
+texture_pressed = ExtResource("2_w6y0u")
+texture_hover = ExtResource("3_cx0sj")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="VBoxContainer/Opciones" unique_id=1927244189]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.69411767)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_constants/shadow_outline_size = 8
+theme_override_fonts/font = ExtResource("4_w6y0u")
+theme_override_font_sizes/font_size = 30
+text = "Opciones"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Espacio" type="Control" parent="VBoxContainer" unique_id=994436511]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+
+[node name="Salir" type="TextureButton" parent="VBoxContainer" unique_id=1432932664]
+custom_minimum_size = Vector2(280, 70)
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("1_c2n5p")
+texture_pressed = ExtResource("2_w6y0u")
+texture_hover = ExtResource("3_cx0sj")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="VBoxContainer/Salir" unique_id=766699718]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.69411767)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_constants/shadow_outline_size = 8
+theme_override_fonts/font = ExtResource("4_w6y0u")
+theme_override_font_sizes/font_size = 30
+text = "Salir"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AudioJugar" type="AudioStreamPlayer" parent="." unique_id=339629606]
+stream = ExtResource("8_qmr2i")
+
+[connection signal="pressed" from="VBoxContainer/NuevoJuego" to="." method="_on_nuevo_juego_pressed"]
+[connection signal="pressed" from="VBoxContainer/Continuar" to="." method="_on_continuar_pressed"]
+[connection signal="pressed" from="VBoxContainer/Opciones" to="." method="_on_opciones_pressed"]
+[connection signal="pressed" from="VBoxContainer/Salir" to="." method="_on_salir_pressed"]
