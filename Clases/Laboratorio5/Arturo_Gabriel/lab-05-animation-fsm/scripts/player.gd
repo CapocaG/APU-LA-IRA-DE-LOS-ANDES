@@ -1,5 +1,18 @@
 extends CharacterBody2D
+enum PlayerState {
+IDLE,
+RUN,
+JUMP,
+FALL,
+WALL_SLIDE,
+DASH
+}
+var current_state: PlayerState = PlayerState.IDLE
 
+
+@onready var animated_sprite: AnimatedSprite2D = (
+	$Visuals/AnimatedSprite2D
+	)
 @export_category("Horizontal Movement")
 @export var max_speed: float = 260.0
 @export var acceleration: float = 1500.0
@@ -22,6 +35,11 @@ extends CharacterBody2D
 @export var dash_duration: float = 0.16
 @export var dash_cooldown: float = 0.45
 
+@onready var animation_tree: AnimationTree = $AnimationTree
+@onready var animation_state_machine: AnimationNodeStateMachinePlayback = (
+animation_tree.get("parameters/playback")
+)
+
 var jump_buffer_timer: float = 0.0
 var coyote_timer: float = 0.0
 var is_dashing: bool = false
@@ -29,14 +47,16 @@ var dash_timer: float = 0.0
 var dash_cooldown_timer: float = 0.0
 var facing_direction: float = 1.0
 
+var was_on_floor: bool = false
+
+func _ready() -> void:
+	animation_tree.active = true
+	animation_state_machine.start("Idle")
 
 func _physics_process(delta: float) -> void:
-	# 1. Actualizar temporizadores (Se quitó el _apply_gravity duplicado de aquí)
 	_update_coyote_time(delta)
 	_update_jump_buffer(delta)
 	_update_dash(delta)
-	
-	# 2. Lógica de movimiento normal
 	if not is_dashing:
 		_apply_gravity(delta)
 		_update_horizontal_movement(delta)
@@ -44,10 +64,14 @@ func _physics_process(delta: float) -> void:
 		_try_wall_jump()
 		_apply_jump_cut()
 		_apply_wall_slide()
-		_try_start_dash()
-		
-	# 3. Aplicar físicas
+	_try_start_dash()
 	move_and_slide()
+	move_and_slide()
+	if is_on_floor() and not was_on_floor:
+		$AnimationPlayer.play("land_squash")
+		was_on_floor = is_on_floor()
+	_update_state()
+	_update_facing_from_input()
 
 
 func _try_start_dash() -> void:
@@ -123,3 +147,66 @@ func _try_jump() -> void:
 		velocity.y = jump_velocity
 		jump_buffer_timer = 0.0
 		coyote_timer = 0.0
+
+func _update_facing(direction: float) -> void:
+	if direction == 0.0:
+		return
+	animated_sprite.flip_h = direction < 0.0
+
+func _update_state() -> void:
+	if is_dashing:
+		_change_state(PlayerState.DASH)
+		return
+	if is_on_wall() and not is_on_floor() and velocity.y > 0.0:
+		_change_state(PlayerState.WALL_SLIDE)
+		return
+	if not is_on_floor():
+		if velocity.y < 0.0:
+			_change_state(PlayerState.JUMP)
+		else:
+			_change_state(PlayerState.FALL)
+		return
+	if abs(velocity.x) > 10.0:
+		_change_state(PlayerState.RUN)
+	else:
+		_change_state(PlayerState.IDLE)
+
+func _change_state(new_state: PlayerState) -> void:
+	if new_state == current_state:
+		return
+	_exit_state(current_state)
+	current_state = new_state
+	_enter_state(current_state)
+func _enter_state(state: PlayerState) -> void:
+	match state:
+		PlayerState.DASH:
+			animated_sprite.play("dash")
+		_:
+			_play_state_animation()
+func _exit_state(state: PlayerState) -> void:
+	match state:
+		PlayerState.DASH:
+			pass
+	
+func _play_state_animation() -> void:
+	match current_state:
+		PlayerState.IDLE:
+			animated_sprite.play("idle")
+		PlayerState.RUN:
+			animated_sprite.play("run")
+		PlayerState.JUMP:
+			animated_sprite.play("jump")
+		PlayerState.FALL:
+			animated_sprite.play("fall")
+		PlayerState.WALL_SLIDE:
+			animated_sprite.play("wall_slide")
+		PlayerState.DASH:
+			animated_sprite.play("dash")
+
+func _update_facing_from_input() -> void:
+	var direction := Input.get_axis(
+		"move_left",
+		"move_right"
+		)
+	if direction != 0.0:
+		animated_sprite.flip_h = direction < 0.0
