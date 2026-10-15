@@ -339,4 +339,4 @@ script = ExtResource("5_j6e47")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Checkpoint" unique_id=1512771322]
 shape = SubResource("RectangleShape2D_r030d")
 
-[node name="Marker2D" type="Marker2D" parent="Checkpoint" unique_id=51627703]
+[node name="SpawnPoint" type="Marker2D" parent="Checkpoint" unique_id=51627703]
