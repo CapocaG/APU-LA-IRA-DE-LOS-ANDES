@@ -48,4 +48,25 @@ func movement_loop() -> void:
 		state = State.IDLE
 		update_animation()
 		
-
+func update_animation() -> void:
+	match state:
+		State.IDLE:
+			animation_playback.travel("idle")
+		State.RUN:
+			animation_playback.travel("run")
+		State.ATTACK:
+			animation_playback.travel("attack")
+			
+func attack() -> void:
+	if state == State.ATTACK:
+		return
+	state = State.ATTACK
+	
+	var mouse_pas: Vector2 = get_global_mouse_position()
+	var attack_dir: Vector2 = (mouse_pas - global_position).normalized()
+	$Sprite2D.flip_h = attack_dir.x < 0 and abs(attack_dir.x) >= abs(attack_dir.y)
+	animation_tree.set("parameters/attack/BlendSpace2D/blend_position", attack_dir)
+	update_animation()
+	
+	await get_tree().create_timer(attack_speed).timeout
+	state = State.IDLE
