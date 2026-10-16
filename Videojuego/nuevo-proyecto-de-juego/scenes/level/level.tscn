@@ -46,6 +46,7 @@
 [ext_resource type="Texture2D" uid="uid://4lm3ni10so2v" path="res://Assets/objetos/Wood_Tower_Blue.png" id="31_d6d7a"]
 [ext_resource type="Texture2D" uid="uid://bdrixegwbq15w" path="res://Assets/objetos/Wood_Tower_InConstruction.png" id="32_lilx5"]
 [ext_resource type="PackedScene" uid="uid://cwe7owmorcybi" path="res://scenes/player/player.tscn" id="46_v0tij"]
+[ext_resource type="Texture2D" uid="uid://ct2rxr6loo86s" path="res://Assets/enemies/Espiritu_ (1).png" id="47_cumia"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_i166f"]
 texture = ExtResource("1_nbgty")
@@ -3695,6 +3696,27 @@ sources/15 = SubResource("TileSetAtlasSource_bhlam")
 sources/16 = SubResource("TileSetAtlasSource_ute1y")
 sources/17 = SubResource("TileSetAtlasSource_qafrb")
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_w4jm6"]
+texture = ExtResource("47_cumia")
+texture_region_size = Vector2i(192, 192)
+0:0/animation_speed = 8.0
+0:0/animation_mode = 1
+0:0/animation_frame_0/duration = 1.0
+0:0/animation_frame_1/duration = 1.0
+0:0/animation_frame_2/duration = 1.0
+0:0/animation_frame_3/duration = 1.0
+0:0/animation_frame_4/duration = 1.0
+0:0/animation_frame_5/duration = 1.0
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_e6yk2"]
+tile_size = Vector2i(64, 64)
+physics_layer_0/collision_layer = 1
+physics_layer_0/collision_mask = 0
+sources/1 = SubResource("TileSetAtlasSource_w4jm6")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_e6yk2"]
+
 [node name="level" type="Node2D" unique_id=697707528]
 position = Vector2(981, 474)
 
@@ -3742,3 +3764,10 @@ tile_map_data = PackedByteArray("AADl//X/AQAAAAAAAADr/wgAAAAAAAAAAADp/wgABQAAAAA
 tile_set = SubResource("TileSet_u840f")
 
 [node name="Player" parent="." unique_id=893648857 instance=ExtResource("46_v0tij")]
+
+[node name="enemies" type="TileMapLayer" parent="." unique_id=50092567]
+tile_map_data = PackedByteArray("AAAUAPn/AQAAAAAAAAA=")
+tile_set = SubResource("TileSet_e6yk2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemies" unique_id=1660585306]
+shape = SubResource("CircleShape2D_e6yk2")
