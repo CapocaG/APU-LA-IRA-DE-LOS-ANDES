@@ -31,7 +31,6 @@
 [ext_resource type="Texture2D" uid="uid://cdcroqebylaxt" path="res://Assets/casas/casa_destruida_2.png" id="28_khcih"]
 [ext_resource type="Texture2D" uid="uid://c0adn3ayt6inm" path="res://Assets/casas/casa_incendiada_2.png" id="29_2cg47"]
 [ext_resource type="Texture2D" uid="uid://bwd0cghc1qebf" path="res://Assets/casas/casa_incendiada_sprite.png" id="30_2lhl4"]
-[ext_resource type="Texture2D" uid="uid://dp2keyyvc3xau" path="res://Assets/casas/casa_pieda_2.png" id="31_quy2w"]
 [ext_resource type="Texture2D" uid="uid://4lm3ni10so2v" path="res://Assets/objetos/Wood_Tower_Blue.png" id="32_xg0sw"]
 [ext_resource type="Texture2D" uid="uid://bdrixegwbq15w" path="res://Assets/objetos/Wood_Tower_InConstruction.png" id="33_kkyhv"]
 [ext_resource type="Texture2D" uid="uid://ci8lujfj25te5" path="res://Assets/casas/Goblin_House_Destroyed.png" id="34_kke7i"]
@@ -2189,8 +2188,11 @@ texture_region_size = Vector2i(362, 724)
 0:0/animation_frame_5/duration = 1.0
 0:0/0 = 0
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_4p1e4"]
+load_path = "res://.godot/imported/casa_pieda_2.png-676f4e7c631fa3440472b8ced89385aa.ctex"
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1wcup"]
-texture = ExtResource("31_quy2w")
+texture = SubResource("CompressedTexture2D_4p1e4")
 texture_region_size = Vector2i(128, 192)
 0:0/0 = 0
 
@@ -2296,7 +2298,7 @@ tile_map_data = PackedByteArray("AADG/xUAAgAAAAAAAADG/xYAAgAAAAAAAADG/xcAAgAAAAA
 tile_set = SubResource("TileSet_nvcam")
 
 [node name="Casas" type="TileMapLayer" parent="." unique_id=550143034]
-tile_map_data = PackedByteArray("AADl//X/AQAAAAAAAADr/wgAAAAAAAAAAADp/wgABQAAAAAAAADn/wgABQAAAAAAAADp/woABQAAAAAAAADn/woAAgAAAAAAAADm/wgAAgAAAAAAAADk/wgAAgAAAAAAAADj/wgABgAAAAAAAADi//X/BgAAAAAAAADo//X/AgAAAAAAAADl//P/AgAAAAAAAADo/wgAAgAAAAAAAADv/wAAAQAAAAAAAAD1//T/AgAAAAAAAADz//T/CAAAAAAAAAAPAPT/CAAAAAAAAAAQAPT/CAAAAAAAAAASAAAACAAAAAAAAAAYAAYACAAAAAAAAAAMAAQACAAAAAAAAADr/wsACAAAAAAAAAAHAAMAEAAAAAAAAAAAAPb/EAAAAAAAAADm/wIAEAAAAAAAAAD5/w0AEAAAAAAAAAAUAAsAEAAAAAAAAAAAAPL/EAAAAAAAAAAUAAkAEQAAAAAAAAAJAAMAEQAAAAAAAAADAP7/EQAAAAAAAAD2/wYAEQAAAAAAAADh/w4AEQAAAAAAAADn//3/EQAAAAAAAADn//n/EQAAAAAAAADm//3/CQAAAAAAAADm//n/CQAAAAAAAAAKAAQACQAAAAAAAAATAAkACQAAAAAAAAATAAEACQAAAAAAAAARAPT/CQAAAAAAAAAKAPX/CQAAAAAAAAD5//n/EgAAAAAAAAD5//v/EwAAAAAAAAD2//v/FAAAAAAAAAA=")
+tile_map_data = PackedByteArray("AADl//X/AQAAAAAAAADr/wgAAAAAAAAAAADp/wgABQAAAAAAAADn/wgABQAAAAAAAADp/woABQAAAAAAAADn/woAAgAAAAAAAADm/wgAAgAAAAAAAADk/wgAAgAAAAAAAADj/wgABgAAAAAAAADo//X/AgAAAAAAAADl//P/AgAAAAAAAADo/wgAAgAAAAAAAADv/wAAAQAAAAAAAAD1//T/AgAAAAAAAADz//T/CAAAAAAAAAAPAPT/CAAAAAAAAAAQAPT/CAAAAAAAAAASAAAACAAAAAAAAAAYAAYACAAAAAAAAAAMAAQACAAAAAAAAADr/wsACAAAAAAAAAAHAAMAEAAAAAAAAAAAAPb/EAAAAAAAAADm/wIAEAAAAAAAAAD5/w0AEAAAAAAAAAAUAAsAEAAAAAAAAAAAAPL/EAAAAAAAAAAUAAkAEQAAAAAAAAAJAAMAEQAAAAAAAAADAP7/EQAAAAAAAAD2/wYAEQAAAAAAAADh/w4AEQAAAAAAAADn//3/EQAAAAAAAADn//n/EQAAAAAAAADm//3/CQAAAAAAAADm//n/CQAAAAAAAAAKAAQACQAAAAAAAAATAAkACQAAAAAAAAATAAEACQAAAAAAAAARAPT/CQAAAAAAAAAKAPX/CQAAAAAAAAD5//n/EgAAAAAAAAD5//v/EwAAAAAAAAD2//v/FAAAAAAAAAA=")
 tile_set = SubResource("TileSet_jkl45")
 
 [node name="Player" parent="." unique_id=893648857 instance=ExtResource("42_ptryy")]
