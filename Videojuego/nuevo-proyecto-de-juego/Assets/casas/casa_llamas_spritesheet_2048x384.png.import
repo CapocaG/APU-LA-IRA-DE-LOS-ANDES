@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dp2keyyvc3xau"
-path="res://.godot/imported/casa_pieda_2.png-676f4e7c631fa3440472b8ced89385aa.ctex"
+uid="uid://4yussk68ho1d"
+path="res://.godot/imported/casa_llamas_spritesheet_2048x384.png-adb6e9fb5363a3510a5a3c1ca2546624.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/casas/casa_pieda_2.png"
-dest_files=["res://.godot/imported/casa_pieda_2.png-676f4e7c631fa3440472b8ced89385aa.ctex"]
+source_file="res://Assets/casas/casa_llamas_spritesheet_2048x384.png"
+dest_files=["res://.godot/imported/casa_llamas_spritesheet_2048x384.png-adb6e9fb5363a3510a5a3c1ca2546624.ctex"]
 
 [params]
 
