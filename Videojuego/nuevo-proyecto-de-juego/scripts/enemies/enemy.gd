@@ -21,11 +21,12 @@ enum State {
 
 
 var state: State = State.IDLE
+var attack_hit_registered: bool = false
 
 @onready var spawn_point: Vector2 = global_position
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var animation_playback: AnimationNodeStateMachinePlayback = $AnimationTree.get("parameters/playback")
-@onready var player: CharacterBody2D = get_tree().get_first_node_in_group("player")
+var player: CharacterBody2D
 @onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
 
 func _ready() -> void:
@@ -34,6 +35,8 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
 	if state == State.DEAD:
 		return
+	if not is_instance_valid(player):
+		player = get_tree().get_first_node_in_group("player") as CharacterBody2D
 	if state == State.ATTACK:
 		return
 	if distance_to_player() <= attack_range:
@@ -92,14 +95,29 @@ func update_animation() -> void:
 			animation_playback.travel("attack")
 
 func attack() -> void:
+	if not is_instance_valid(player):
+		state = State.RETURN
+		return
+	attack_hit_registered = false
 	var player_pos: Vector2 = player.global_position 
 	var attack_dir: Vector2 = (player_pos - global_position).normalized() 
 	$Sprite2D.flip_h = attack_dir.x < 0 and abs(attack_dir.x) >= abs(attack_dir.y)
 	animation_tree.set("parameters/attack/BlendSpace2D/blend_position", attack_dir) 
 	update_animation() 
 	
-	await get_tree().create_timer(attack_speed).timeout 
-	state = State.IDLE
+	var impact_delay: float = minf(attack_speed * 0.4, 0.4)
+	await get_tree().create_timer(impact_delay).timeout
+	if is_inside_tree() and state == State.ATTACK and is_instance_valid(player) and distance_to_player() <= attack_range:
+		_apply_attack_hit(player)
+	await get_tree().create_timer(maxf(attack_speed - impact_delay, 0.01)).timeout
+	if is_inside_tree() and state != State.DEAD:
+		state = State.IDLE
+
+func _apply_attack_hit(target: Node) -> void:
+	if attack_hit_registered or not is_instance_valid(target) or not target.has_method("take_damage"):
+		return
+	attack_hit_registered = true
+	target.take_damage(attack_damage)
 
 func take_damage(damage_taken: int) -> void:
 	hitpoints -= damage_taken
@@ -113,4 +131,5 @@ func death() -> void:
 	queue_free()
 
 func _on_hit_box_area_entered(area: Area2D) -> void:
-	area.owner.take_damage(attack_damage)
+	if state == State.ATTACK and area.owner == player:
+		_apply_attack_hit(player)

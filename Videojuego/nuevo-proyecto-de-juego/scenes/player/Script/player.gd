@@ -1,5 +1,8 @@
 extends CharacterBody2D
 
+signal game_over(victoria:bool)
+signal update_hp_bar(hp_bar_value: int)
+
 enum State {
 	IDLE,
 	RUN,
@@ -9,18 +12,21 @@ enum State {
 
 @export_category("Stats")
 @export var speed: int=480
-@export var attack_speed: float=0.6
 @export var attack_damage: int = 60
 @export var hitpoints: int = 150
 
 var state: State =State.IDLE
-var move_direction: Vector2 = Vector2.ZERO
+var move_direction: Vector2 = Vector2(0,0)
+var attack_speed: float
+var hitpoints_max: int
 
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var animation_playback: AnimationNodeStateMachinePlayback = $AnimationTree["parameters/playback"] 
 
 func _ready() -> void:
+	hitpoints_max = hitpoints
 	animation_tree.set_active(true)
+	calculate_stats()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
@@ -29,6 +35,12 @@ func _unhandled_input(event: InputEvent) -> void:
 func _physics_process(_delta: float) -> void:
 	if not state == State.ATTACK:
 		movement_loop()
+		
+func calculate_stats() -> void:
+	attack_speed = Equations.calculate_attack_speed()
+	var time_factor: float = Equations.BASE_ATTACK_SPEED / attack_speed 
+	animation_tree.set("parameters/attack/TimeScale/scale", time_factor)
+	print("my new attack speed: ", attack_speed)
 
 func movement_loop() -> void:
 	move_direction.x = int(Input.is_action_pressed("right")) - int(Input.is_action_pressed("left"))
@@ -75,11 +87,13 @@ func attack() -> void:
 	
 func take_damage(damage_taken: int) -> void:
 	hitpoints -= damage_taken
+	@warning_ignore("integer_division")
+	update_hp_bar.emit((hitpoints * 100) / hitpoints_max)
 	if hitpoints <= 0:
 		death()
 		
 func death() -> void:
-	print("I died")
+	game_over.emit(false)
 
 func _on_hit_box_area_entered(area: Area2D) -> void:
 	area.owner.take_damage(attack_damage)

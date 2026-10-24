@@ -15,6 +15,11 @@ run/main_scene="uid://c2hcfukyuq8tn"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+PlayerData="*uid://cww2yi7dlr33b"
+LevelData="*uid://22yp63thhtfb"
+
 [display]
 
 window/size/viewport_width=1280
@@ -25,6 +30,7 @@ window/stretch/aspect="expand"
 [global_group]
 
 player=""
+enemies=""
 
 [input]
 

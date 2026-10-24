@@ -46,6 +46,7 @@
 [ext_resource type="Texture2D" uid="uid://ck80kpkxy4tqa" path="res://Assets/tiles/NavMeshPainter.png" id="46_eim2y"]
 [ext_resource type="PackedScene" uid="uid://cwe7owmorcybi" path="res://scenes/player/player.tscn" id="46_v0tij"]
 [ext_resource type="PackedScene" uid="uid://bcj2na0h7gqrd" path="res://scenes/enemies/enemy.tscn" id="47_cumia"]
+[ext_resource type="PackedScene" uid="uid://y7bc6wmxge28" path="res://scenes/enemies/espiritu_enemy.tscn" id="47_eim2y"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_i166f"]
 texture = ExtResource("1_nbgty")
@@ -3793,3 +3794,6 @@ position = Vector2(336, 366)
 
 [node name="enemy2" parent="Enemies" unique_id=456166074 instance=ExtResource("47_cumia")]
 position = Vector2(-362, -378)
+
+[node name="espirituEnemy" parent="Enemies" unique_id=1191600205 instance=ExtResource("47_eim2y")]
+position = Vector2(1163, -276)
