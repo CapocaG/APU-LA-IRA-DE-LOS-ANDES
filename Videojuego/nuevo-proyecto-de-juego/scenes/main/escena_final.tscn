@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dadhqxoh8an4t"]
 
 [ext_resource type="FontFile" uid="uid://31jst86mgp48" path="res://Assets/fonts/PirataOne-Regular.ttf" id="1_vlcgc"]
+[ext_resource type="Script" uid="uid://d2jbkd8xpjgay" path="res://scripts/main/escena_final.gd" id="1_wdrgs"]
 [ext_resource type="Texture2D" uid="uid://d0poumisynabh" path="res://Assets/ui/buttons/Apu_Button_Normal.png" id="2_wdrgs"]
 [ext_resource type="Texture2D" uid="uid://c45v5g3q1kir8" path="res://Assets/ui/buttons/Apu_Button_Pressed.png" id="3_fm5rf"]
 [ext_resource type="Texture2D" uid="uid://r60tuvihij35" path="res://Assets/ui/buttons/Apu_Button_Hover.png" id="4_w63p6"]
@@ -12,6 +13,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_wdrgs")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=337710637]
 layout_mode = 1
@@ -98,6 +100,9 @@ theme_override_constants/outline_size = 4
 theme_override_constants/shadow_outline_size = 8
 theme_override_fonts/font = ExtResource("1_vlcgc")
 theme_override_font_sizes/font_size = 30
-text = "Menu"
+text = "Menú"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[connection signal="pressed" from="VB/Botones/Replay" to="." method="_on_replay_pressed"]
+[connection signal="pressed" from="VB/Botones/Menu" to="." method="_on_menu_pressed"]

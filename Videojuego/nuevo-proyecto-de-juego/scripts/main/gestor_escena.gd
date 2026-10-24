@@ -6,8 +6,9 @@ extends Node
 func _ready() -> void:
 	load_menu("game_start")
 
-@warning_ignore("unused_parameter")
 func load_menu(origin: String) -> void:
+	if origin == "escena_final":
+		get_node("GameScene").queue_free()
 	var menu: Control = menu_packed.instantiate()
 	menu.nuevo_juego_pressed.connect(nuevo_juego)
 	menu.continuar_pressed.connect(settings_open)
@@ -15,10 +16,11 @@ func load_menu(origin: String) -> void:
 	menu.salir_pressed.connect(exit_game)
 	add_child(menu)
 
-@warning_ignore("unused_parameter")
 func nuevo_juego(origin: String) -> void:
 	if origin == "menu":
 		get_node("Menu").queue_free()
+	if origin == "escena_final":
+		get_node("GameScene").queue_free()
 		await get_tree().process_frame
 	var level: Node2D = level_packed.instantiate()
 	add_child(level)

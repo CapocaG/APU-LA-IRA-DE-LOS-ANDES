@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bffnn8kphpuxj"
-path="res://.godot/imported/Espiritu_apu.png-209481c586e8ffeaa555b8cbade82195.ctex"
+uid="uid://i15j748nuiap"
+path="res://.godot/imported/fragmento_reference.png-657c83a24d36fdbc27c1f3f89ea35ff0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/enemies/animations/Espiritu_apu.png"
-dest_files=["res://.godot/imported/Espiritu_apu.png-209481c586e8ffeaa555b8cbade82195.ctex"]
+source_file="res://Assets/items/fragmento_reference.png"
+dest_files=["res://.godot/imported/fragmento_reference.png-657c83a24d36fdbc27c1f3f89ea35ff0.ctex"]
 
 [params]
 
