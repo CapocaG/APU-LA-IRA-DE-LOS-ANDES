@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bp5u2inkmpl6h"
-path="res://.godot/imported/Tilemap_Flat.png-bd829f749c90ea86a149171b37dfdbca.ctex"
+uid="uid://qp4g6sdbqofk"
+path="res://.godot/imported/PlantaTemplo.png-95d9894a721484b54f34a4ef3f58bb0c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Tilemap_Flat.png"
-dest_files=["res://.godot/imported/Tilemap_Flat.png-bd829f749c90ea86a149171b37dfdbca.ctex"]
+source_file="res://Assets/objetos/PlantaTemplo.png"
+dest_files=["res://.godot/imported/PlantaTemplo.png-95d9894a721484b54f34a4ef3f58bb0c.ctex"]
 
 [params]
 
