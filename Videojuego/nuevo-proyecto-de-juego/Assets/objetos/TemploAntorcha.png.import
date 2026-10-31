@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cqlhv6l66oey5"
-path="res://.godot/imported/Bridge_All.png-9c4b3b73d5d0e6f6350e632ff1ad66fb.ctex"
+uid="uid://b8h50ewx3re5f"
+path="res://.godot/imported/TemploAntorcha.png-5e633a3dec93886101deab8ae1630299.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Bridge_All.png"
-dest_files=["res://.godot/imported/Bridge_All.png-9c4b3b73d5d0e6f6350e632ff1ad66fb.ctex"]
+source_file="res://Assets/objetos/TemploAntorcha.png"
+dest_files=["res://.godot/imported/TemploAntorcha.png-5e633a3dec93886101deab8ae1630299.ctex"]
 
 [params]
 

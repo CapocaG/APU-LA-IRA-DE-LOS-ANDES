@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bxqhh3on1ukk5"
-path="res://.godot/imported/grietas.png-995582f64d47b2db95fb3683687cea2d.ctex"
+uid="uid://buqvsngh63tj5"
+path="res://.godot/imported/PilarAzul8.png-b47ccab8c49db4fda88a59398320f0ad.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/grietas.png"
-dest_files=["res://.godot/imported/grietas.png-995582f64d47b2db95fb3683687cea2d.ctex"]
+source_file="res://Assets/objetos/PilarAzul8.png"
+dest_files=["res://.godot/imported/PilarAzul8.png-b47ccab8c49db4fda88a59398320f0ad.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://blkos5ibbxljm"
-path="res://.godot/imported/puente.png-46e8b6d59b15ba73da44c258dea0c3eb.ctex"
+uid="uid://bjbdjcot55lnj"
+path="res://.godot/imported/EscudoAzul.png-afc1887e9e20f67e43a738b4d7fd4769.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/puente.png"
-dest_files=["res://.godot/imported/puente.png-46e8b6d59b15ba73da44c258dea0c3eb.ctex"]
+source_file="res://Assets/objetos/EscudoAzul.png"
+dest_files=["res://.godot/imported/EscudoAzul.png-afc1887e9e20f67e43a738b4d7fd4769.ctex"]
 
 [params]
 

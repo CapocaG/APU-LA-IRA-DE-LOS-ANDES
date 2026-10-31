@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bf4op0akh23g2"
-path="res://.godot/imported/Shadow.png-983b6206ecdb81e9243583ecccaae850.ctex"
+uid="uid://beslauojys8eo"
+path="res://.godot/imported/Arcada.png-dc4b5568f4725fb51094d7c8f3a2dfc2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Shadow.png"
-dest_files=["res://.godot/imported/Shadow.png-983b6206ecdb81e9243583ecccaae850.ctex"]
+source_file="res://Assets/ruinas/Arcada.png"
+dest_files=["res://.godot/imported/Arcada.png-dc4b5568f4725fb51094d7c8f3a2dfc2.ctex"]
 
 [params]
 
