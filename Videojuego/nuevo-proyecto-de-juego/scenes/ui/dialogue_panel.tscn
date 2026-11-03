@@ -1,0 +1,107 @@
+[gd_scene format=3 uid="uid://bl5fvq8cwjac5"]
+
+[ext_resource type="Script" uid="uid://b1a227qwis83a" path="res://scripts/ui/dialogue_panel.gd" id="1_lcxno"]
+[ext_resource type="FontFile" uid="uid://31jst86mgp48" path="res://Assets/fonts/PirataOne-Regular.ttf" id="2_font"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dialogue"]
+bg_color = Color(0.0901, 0.14602998, 0.17, 0.78431374)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.58, 0.52, 0.32, 0.9)
+corner_radius_top_left = 13
+corner_radius_top_right = 13
+corner_radius_bottom_right = 13
+corner_radius_bottom_left = 13
+shadow_color = Color(0, 0, 0, 0.44)
+shadow_size = 7
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button"]
+content_margin_left = 14.0
+content_margin_top = 4.0
+content_margin_right = 14.0
+content_margin_bottom = 4.0
+bg_color = Color(0.13, 0.19, 0.2, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.83, 0.69, 0.38, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="DialoguePanel" type="Control" unique_id=1760212208 groups=["dialogue_ui"]]
+layout_mode = 3
+anchor_left = 0.012
+anchor_top = 1.0
+anchor_right = 0.988
+anchor_bottom = 1.0
+offset_left = 79.64
+offset_top = -218.0
+offset_right = -89.640015
+offset_bottom = -14.0
+grow_horizontal = 2
+grow_vertical = 0
+offset_transform_enabled = true
+script = ExtResource("1_lcxno")
+
+[node name="DialogueBackground" type="Panel" parent="." unique_id=1723394882]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dialogue")
+
+[node name="Portrait" type="AnimatedSprite2D" parent="." unique_id=497054242]
+texture_filter = 1
+position = Vector2(88, 100)
+scale = Vector2(0.82, 0.82)
+
+[node name="SpeakerLabel" type="Label" parent="." unique_id=1560687848]
+layout_mode = 0
+anchor_right = 1.0
+offset_left = 184.0
+offset_top = 14.0
+offset_right = -24.0
+offset_bottom = 55.0
+theme_override_colors/font_color = Color(0.91, 0.77, 0.46, 1)
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 30
+
+[node name="BodyLabel" type="Label" parent="." unique_id=1847481752]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 184.0
+offset_top = 57.0
+offset_right = -24.0
+offset_bottom = -56.0
+theme_override_colors/font_color = Color(0.96, 0.94, 0.84, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.6509804)
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 22
+autowrap_mode = 3
+
+[node name="AdvanceButton" type="Button" parent="." unique_id=651414949]
+layout_mode = 0
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -225.0
+offset_top = -48.0
+offset_right = -25.0
+offset_bottom = -10.0
+focus_mode = 0
+theme_override_colors/font_color = Color(0.96, 0.94, 0.84, 1)
+theme_override_font_sizes/font_size = 21
+theme_override_styles/normal = SubResource("StyleBoxFlat_button")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_button")
+theme_override_styles/hover = SubResource("StyleBoxFlat_button")
+text = "Continuar
+"

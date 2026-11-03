@@ -19,6 +19,7 @@ var state: State =State.IDLE
 var move_direction: Vector2 = Vector2(0,0)
 var attack_speed: float
 var hitpoints_max: int
+var dialogue_active: bool = false
 
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var animation_playback: AnimationNodeStateMachinePlayback = $AnimationTree["parameters/playback"] 
@@ -35,6 +36,18 @@ func _unhandled_input(event: InputEvent) -> void:
 func _physics_process(_delta: float) -> void:
 	if not state == State.ATTACK:
 		movement_loop()
+		
+func set_dialogue_active(active: bool) -> void:
+	dialogue_active = active
+	if active:
+		_stop_movement()
+		
+func _stop_movement() -> void:
+	move_direction = Vector2.ZERO
+	velocity = Vector2.ZERO
+	if state != State.DEAD:
+		state = State.IDLE
+		update_animation()
 		
 func calculate_stats() -> void:
 	attack_speed = Equations.calculate_attack_speed()
