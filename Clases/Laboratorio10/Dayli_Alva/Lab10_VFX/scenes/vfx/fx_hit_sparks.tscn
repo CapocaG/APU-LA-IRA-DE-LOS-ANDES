@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://fqqhr5ub2085"]
+
+[ext_resource type="Script" uid="uid://b32dfhf15dbc5" path="res://scripts/vfx/fx_hit_sparks.gd" id="1_qahe8"]
+
+[sub_resource type="Gradient" id="Gradient_sparks"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_sparks"]
+gradient = SubResource("Gradient_sparks")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qahe8"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 170.0
+initial_velocity_max = 300.0
+gravity = Vector3(0, 100, 0)
+scale_min = 0.5
+scale_max = 1.5
+color_ramp = SubResource("GradientTexture1D_sparks")
+
+[node name="FX_HitSparks" type="Node2D" unique_id=853831832]
+script = ExtResource("1_qahe8")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=304129564]
+emitting = false
+amount = 24
+lifetime = 0.35000000000000003
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_qahe8")
