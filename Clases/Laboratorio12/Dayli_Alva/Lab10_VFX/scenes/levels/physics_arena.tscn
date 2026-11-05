@@ -1,0 +1,117 @@
+[gd_scene format=3 uid="uid://bx21hjox6y6di"]
+
+[ext_resource type="PackedScene" uid="uid://c703v8p13ifti" path="res://scenes/environment/wall.tscn" id="1_qg08i"]
+[ext_resource type="PackedScene" uid="uid://cie28t1csn1wt" path="res://scenes/player/player.tscn" id="2_s77xf"]
+[ext_resource type="Script" uid="uid://ce2ukmky7m4wa" path="res://scripts/ice_zone.gd" id="3_s77xf"]
+[ext_resource type="Script" uid="uid://cpn4ai3h1fvcy" path="res://scripts/mud_zone.gd" id="4_qphiv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e6yk2"]
+size = Vector2(110, 346.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uoar7"]
+size = Vector2(237, 110)
+
+[node name="PhysicsArena" type="Node2D" unique_id=1119799606]
+
+[node name="Wall18" parent="." unique_id=1243092019 instance=ExtResource("1_qg08i")]
+position = Vector2(1296, 392.00003)
+rotation = 1.5707964
+scale = Vector2(2.6, 1)
+
+[node name="Wall17" parent="." unique_id=576777008 instance=ExtResource("1_qg08i")]
+position = Vector2(718, 725)
+
+[node name="Wall14" parent="." unique_id=646708726 instance=ExtResource("1_qg08i")]
+position = Vector2(904, 590)
+rotation = 1.5707964
+scale = Vector2(0.7, 1)
+
+[node name="Wall13" parent="." unique_id=2109186741 instance=ExtResource("1_qg08i")]
+position = Vector2(721, 511)
+scale = Vector2(0.7, 1)
+
+[node name="Wall12" parent="." unique_id=1429139203 instance=ExtResource("1_qg08i")]
+position = Vector2(210, 354)
+scale = Vector2(0.5, 1)
+
+[node name="Wall11" parent="." unique_id=1273612996 instance=ExtResource("1_qg08i")]
+position = Vector2(188, 504)
+scale = Vector2(1.2, 1)
+
+[node name="Wall10" parent="." unique_id=414234655 instance=ExtResource("1_qg08i")]
+position = Vector2(726, 327)
+scale = Vector2(0.8, 1)
+
+[node name="Wall9" parent="." unique_id=1868047390 instance=ExtResource("1_qg08i")]
+position = Vector2(456, 340.99997)
+rotation = 1.5707964
+scale = Vector2(1.1, 1)
+
+[node name="Wall8" parent="." unique_id=1397910176 instance=ExtResource("1_qg08i")]
+position = Vector2(499, 893)
+scale = Vector2(5.28, 1)
+
+[node name="Wall7" parent="." unique_id=1643848626 instance=ExtResource("1_qg08i")]
+position = Vector2(640, 270.00003)
+rotation = 1.5707964
+scale = Vector2(1.5, 1)
+
+[node name="Wall6" parent="." unique_id=766143685 instance=ExtResource("1_qg08i")]
+position = Vector2(1113, 354)
+rotation = 1.5707964
+scale = Vector2(1.6, 1)
+
+[node name="Wall5" parent="." unique_id=38497027 instance=ExtResource("1_qg08i")]
+position = Vector2(1500, 317)
+rotation = 1.5707964
+scale = Vector2(3, 1)
+
+[node name="Wall4" parent="." unique_id=259833285 instance=ExtResource("1_qg08i")]
+position = Vector2(913, 164)
+scale = Vector2(0.8, 1)
+
+[node name="Wall3" parent="." unique_id=1991603723 instance=ExtResource("1_qg08i")]
+position = Vector2(217, 211)
+
+[node name="Wall2" parent="." unique_id=1748762678 instance=ExtResource("1_qg08i")]
+position = Vector2(-112, 310)
+rotation = 1.5707964
+scale = Vector2(3, 1)
+
+[node name="Wall" parent="." unique_id=1326571414 instance=ExtResource("1_qg08i")]
+position = Vector2(489, -100)
+scale = Vector2(5.3, 1)
+
+[node name="Player" parent="." unique_id=693228329 instance=ExtResource("2_s77xf")]
+position = Vector2(-48, 6)
+
+[node name="Wall15" parent="." unique_id=731826898 instance=ExtResource("1_qg08i")]
+position = Vector2(197, 295)
+rotation = 1.5707964
+scale = Vector2(0.3, 1)
+
+[node name="Wall16" parent="." unique_id=900820005 instance=ExtResource("1_qg08i")]
+position = Vector2(19, 663)
+
+[node name="Wall19" parent="." unique_id=1285882121 instance=ExtResource("1_qg08i")]
+position = Vector2(22, 72)
+
+[node name="IceZone" type="Area2D" parent="." unique_id=1771374380]
+collision_mask = 2
+script = ExtResource("3_s77xf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="IceZone" unique_id=406923946]
+position = Vector2(526, 382.75)
+shape = SubResource("RectangleShape2D_e6yk2")
+
+[node name="MudZone" type="Area2D" parent="." unique_id=906438578]
+script = ExtResource("4_qphiv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MudZone" unique_id=848398303]
+position = Vector2(1180.5, 11)
+shape = SubResource("RectangleShape2D_uoar7")
+
+[connection signal="body_entered" from="IceZone" to="IceZone" method="_on_ice_zone_body_entered"]
+[connection signal="body_exited" from="IceZone" to="IceZone" method="_on_ice_zone_body_exited"]
+[connection signal="body_entered" from="MudZone" to="MudZone" method="_on_body_entered"]
+[connection signal="body_exited" from="MudZone" to="MudZone" method="_on_body_exited"]

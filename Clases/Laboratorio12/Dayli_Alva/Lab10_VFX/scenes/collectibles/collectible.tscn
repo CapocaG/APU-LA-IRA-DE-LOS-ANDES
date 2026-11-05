@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://bqcr8oqpc4cik"]
+
+[ext_resource type="Script" uid="uid://b2xdodwcsrump" path="res://scripts/collectible.gd" id="1_lb3xb"]
+[ext_resource type="Texture2D" uid="uid://dfyn8yx4qj4c2" path="res://assets/images/Coin.png" id="2_irp14"]
+[ext_resource type="AudioStream" uid="uid://bck8tjjhpynp5" path="res://assets/audio/AudioCollectible.mp3" id="3_vee0f"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_k2x07"]
+
+[node name="Collectible" type="Area2D" unique_id=1144035274 groups=["collectible"]]
+script = ExtResource("1_lb3xb")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=491466351]
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_irp14")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=541584951]
+shape = SubResource("CircleShape2D_k2x07")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1728731000]
+stream = ExtResource("3_vee0f")
