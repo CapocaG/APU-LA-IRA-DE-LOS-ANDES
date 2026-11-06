@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://bx4oswnbw2fgt"]
+
+[ext_resource type="Script" uid="uid://bqe8vc38scdgc" path="res://scenes/player/Script/hud.gd" id="1_qpsba"]
+[ext_resource type="Texture2D" uid="uid://bi0m3fjc8iu8h" path="res://Assets/ui/barra/barra (2).png" id="2_xivtj"]
+[ext_resource type="Texture2D" uid="uid://cxkbsqm1iabfk" path="res://Assets/ui/barra/marco_vida.png" id="2_xpwvb"]
+[ext_resource type="Texture2D" uid="uid://lpfcqwupomqv" path="res://Assets/ui/barra/contenedor (1).png" id="3_xpwvb"]
+
+[node name="HUD" type="CanvasLayer" unique_id=664568007]
+script = ExtResource("1_qpsba")
+
+[node name="DangerOverlay" type="TextureRect" parent="." unique_id=1527301443]
+modulate = Color(1, 1, 1, 0)
+offset_right = 1280.0
+offset_bottom = 720.0
+texture = ExtResource("2_xpwvb")
+expand_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1696476752]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="MarginContainer" unique_id=119233556]
+layout_mode = 2
+value = 100.0
+texture_over = ExtResource("2_xivtj")
+texture_progress = ExtResource("3_xpwvb")
+texture_progress_offset = Vector2(63, 0)

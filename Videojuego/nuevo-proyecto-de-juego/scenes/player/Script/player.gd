@@ -14,7 +14,8 @@ enum State {
 @export var speed: int=480
 @export var attack_damage: int = 60
 @export var hitpoints: int = 150
-
+@export var max_health: int = 100
+var current_health: int
 var state: State =State.IDLE
 var move_direction: Vector2 = Vector2(0,0)
 var attack_speed: float
@@ -27,6 +28,8 @@ func _ready() -> void:
 	hitpoints_max = hitpoints
 	animation_tree.set_active(true)
 	calculate_stats()
+	add_to_group("player")
+	current_health = max_health
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
@@ -87,6 +90,7 @@ func attack() -> void:
 	
 func take_damage(damage_taken: int) -> void:
 	hitpoints -= damage_taken
+	hitpoints = clamp(hitpoints, 0, hitpoints_max)
 	@warning_ignore("integer_division")
 	update_hp_bar.emit((hitpoints * 100) / hitpoints_max)
 	if hitpoints <= 0:
@@ -97,3 +101,4 @@ func death() -> void:
 
 func _on_hit_box_area_entered(area: Area2D) -> void:
 	area.owner.take_damage(attack_damage)
+	
