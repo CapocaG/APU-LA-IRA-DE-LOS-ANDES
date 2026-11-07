@@ -7,17 +7,15 @@ signal levelup
 var total_enemies: int
 var killed_enemies: int = 0
 
-@onready var HUD: Control = $UI/HUD
-
 func _ready() -> void: 
 	var enemy_array: Array = get_tree().get_nodes_in_group("enemies") 
 	total_enemies = enemy_array.size()
 	for i in enemy_array: 
 		i.died.connect(experience_gained)
 	var player: CharacterBody2D = $level/Player
+	$UI/StatusHUD.bind_player(player)
 	levelup.connect(player.calculate_stats)
 	player.game_over.connect(display_escena_final)
-	player.update_hp_bar.connect(HUD.update_hp_bar)
 	
 func enemy_died(exp_reward: int) -> void:
 	killed_enemies += 1
