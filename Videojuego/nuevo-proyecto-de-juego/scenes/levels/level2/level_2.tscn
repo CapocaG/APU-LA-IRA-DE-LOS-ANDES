@@ -39,6 +39,9 @@
 [ext_resource type="NavigationPolygon" uid="uid://cg7rbi17iffn8" path="res://scenes/navigation/templo_destruido_nav.tres" id="37_uys8k"]
 [ext_resource type="PackedScene" uid="uid://bkeex7q2plt7p" path="res://scenes/npcs/yachaq_anciano.tscn" id="38_mjqka"]
 [ext_resource type="PackedScene" uid="uid://bl5fvq8cwjac5" path="res://scenes/ui/dialogue_panel.tscn" id="39_j4b7n"]
+[ext_resource type="PackedScene" uid="uid://b8l5kqvcy2tdt" path="res://scenes/enemies/illapa_enemy.tscn" id="40_j4b7n"]
+[ext_resource type="PackedScene" uid="uid://bol5sjr0tbmmd" path="res://scenes/ui/status_hud.tscn" id="41_lxhnx"]
+[ext_resource type="Texture2D" uid="uid://bqruwufl1tw34" path="res://Assets/effects/luz_radial_suave.png" id="41_o0x22"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_u7l0e"]
 texture = ExtResource("1_ao1bm")
@@ -2371,11 +2374,6 @@ tile_set = SubResource("TileSet_2pqi3")
 tile_map_data = PackedByteArray("AADi//r/AQABAAAAAADl//n/AQABAAAAAADn//j/AQACAAAAAADp//n/AQACAAAAAADk//n/AQACAAAAAADr//z/AQACAAAAAADs//z/AQAFAAAAAADr//v/AQAEAAAAAADo//v/BQAAAAAAAADk//v/BQAAAAAAAAAJABMAAgAAAAAAAAALABMAAgAAAAAAAAALABEAAQABAAAAAAD7/xQAAgAAAAAAAAAJABUAAgAAAAAAAAAMABUAAgAAAAAAAAAEABIABgAAAAAAAAAAABEAAAAEAAAAAAAIABMABwACAAAAAAAIABQABwABAAEAAAACABMABwAAAAAAAAACABQABwACAAEAAAAKABQABwABAAEAAAAGABMABwAAAAAAAAAFABMABwABAAAAAAABABAABwACAAEAAAD//xAABwABAAEAAAAKABIABwABAAAAAAAGABEABwABAAAAAAAAABAABwAAAAEAAAAHABAABwACAAAAAAAGABAABwABAAEAAAD+/xMABwABAAEAAAD+/xQABwACAAAAAADi//7/AgAAAAAAAADh//7/AgAAAAAAAAD4/xMABwABAAAAAADy/xMABwAAAAAAAAD0/xIABwACAAAAAADx/xEABwACAAEAAADw/xQABwABAAEAAAA=")
 tile_set = SubResource("TileSet_uoar7")
 
-[node name="Entrada" type="Node2D" parent="." unique_id=1230593703]
-
-[node name="CasaIllapa" type="Marker2D" parent="Entrada" unique_id=1996511768]
-position = Vector2(95, -1320)
-
 [node name="Player" parent="." unique_id=893648857 instance=ExtResource("10_0ph2d")]
 position = Vector2(67, 246)
 
@@ -2388,3 +2386,103 @@ position = Vector2(-1265, 20)
 [node name="Dialogue" type="CanvasLayer" parent="." unique_id=1722484925]
 
 [node name="DialoguePanel" parent="Dialogue" unique_id=1760212208 instance=ExtResource("39_j4b7n")]
+
+[node name="IllapaEnemy" parent="." unique_id=574669222 instance=ExtResource("40_j4b7n")]
+position = Vector2(101, -1050)
+
+[node name="LucesAntorchas" type="Node2D" parent="." unique_id=1589406805]
+
+[node name="AntochaSI" type="PointLight2D" parent="LucesAntorchas" unique_id=2100878644]
+position = Vector2(-355, -1537)
+energy = 0.9
+texture = ExtResource("41_o0x22")
+texture_scale = 1.2
+
+[node name="AntorchaSD" type="PointLight2D" parent="LucesAntorchas" unique_id=138083197]
+position = Vector2(477, -1545)
+energy = 0.9
+texture = ExtResource("41_o0x22")
+texture_scale = 1.2
+
+[node name="AntorchaII" type="PointLight2D" parent="LucesAntorchas" unique_id=219651382]
+position = Vector2(-610, -1476)
+energy = 0.9
+texture = ExtResource("41_o0x22")
+texture_scale = 1.2
+
+[node name="AntorchaID" type="PointLight2D" parent="LucesAntorchas" unique_id=106249679]
+position = Vector2(804, -1468)
+energy = 0.9
+texture = ExtResource("41_o0x22")
+texture_scale = 1.2
+
+[node name="AntochaSI2" type="PointLight2D" parent="LucesAntorchas" unique_id=1575901500]
+position = Vector2(-350, -1032)
+energy = 0.9
+texture = ExtResource("41_o0x22")
+texture_scale = 1.2
+
+[node name="AntorchaII2" type="PointLight2D" parent="LucesAntorchas" unique_id=616422716]
+position = Vector2(547, -1034)
+energy = 0.9
+texture = ExtResource("41_o0x22")
+texture_scale = 1.2
+
+[node name="AntochaSI3" type="PointLight2D" parent="LucesAntorchas" unique_id=458888708]
+position = Vector2(1694, -1279)
+energy = 0.9
+texture = ExtResource("41_o0x22")
+texture_scale = 1.2
+
+[node name="AntorchaII3" type="PointLight2D" parent="LucesAntorchas" unique_id=545633860]
+position = Vector2(2337, -1280)
+energy = 0.9
+texture = ExtResource("41_o0x22")
+texture_scale = 1.2
+
+[node name="AntorchaII4" type="PointLight2D" parent="LucesAntorchas" unique_id=2057130971]
+position = Vector2(1763, -767)
+energy = 0.9
+texture = ExtResource("41_o0x22")
+texture_scale = 1.2
+
+[node name="AntorchaID2" type="PointLight2D" parent="LucesAntorchas" unique_id=481447084]
+position = Vector2(2337, -766)
+energy = 0.9
+texture = ExtResource("41_o0x22")
+texture_scale = 1.2
+
+[node name="AntorchaTSD" type="PointLight2D" parent="LucesAntorchas" unique_id=1427495808]
+position = Vector2(-1630, 417)
+color = Color(1, 0.6784314, 0.36078432, 1)
+energy = 0.9
+texture = ExtResource("41_o0x22")
+texture_scale = 1.2
+
+[node name="AntorchaTSD2" type="PointLight2D" parent="LucesAntorchas" unique_id=96949630]
+position = Vector2(-1761, -295)
+color = Color(1, 0.6784314, 0.36078432, 1)
+energy = 0.9
+texture = ExtResource("41_o0x22")
+texture_scale = 1.2
+
+[node name="AntorchaTII" type="PointLight2D" parent="LucesAntorchas" unique_id=11937162]
+position = Vector2(-1118, 417)
+color = Color(1, 0.6784314, 0.36078432, 1)
+energy = 0.9
+texture = ExtResource("41_o0x22")
+texture_scale = 1.2
+
+[node name="AntorchaTII2" type="PointLight2D" parent="LucesAntorchas" unique_id=508244308]
+position = Vector2(-1503, -295)
+color = Color(1, 0.6784314, 0.36078432, 1)
+energy = 0.9
+texture = ExtResource("41_o0x22")
+texture_scale = 1.2
+
+[node name="HealthCanvas" type="CanvasLayer" parent="." unique_id=763973468]
+
+[node name="StatusHUD" parent="HealthCanvas" unique_id=618409305 instance=ExtResource("41_lxhnx")]
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1985039605]
+color = Color(0.69803923, 0.7137255, 0.8156863, 1)
