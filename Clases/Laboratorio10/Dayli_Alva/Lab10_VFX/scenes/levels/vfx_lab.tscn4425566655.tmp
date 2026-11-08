@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://bdlb5ug6h5ssd"]
+
+[ext_resource type="Script" uid="uid://dtu80alyg0jq2" path="res://scripts/vfx/vfx_lab.gd" id="1_j3hdo"]
+[ext_resource type="Script" uid="uid://7qsxmpb5go3a" path="res://scripts/vfx/vfx_spawner.gd" id="2_3hxry"]
+
+[node name="VFXLab" type="Node2D" unique_id=810810422]
+script = ExtResource("1_j3hdo")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1413761568]
+
+[node name="VFXRoot" type="Node" parent="." unique_id=998285648]
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=1324510585]
+
+[node name="VFXSpawner" type="Node" parent="." unique_id=1766644963 node_paths=PackedStringArray("vfx_root")]
+script = ExtResource("2_3hxry")
+vfx_root = NodePath("../VFXRoot")

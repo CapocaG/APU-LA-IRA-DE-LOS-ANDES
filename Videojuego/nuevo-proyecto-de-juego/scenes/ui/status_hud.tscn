@@ -1,0 +1,369 @@
+[gd_scene format=3 uid="uid://bol5sjr0tbmmd"]
+
+[ext_resource type="Script" uid="uid://dv7lyjbn0hxvn" path="res://scripts/ui/status_hud.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://dtsc8yuts6815" path="res://Assets/ui/hud/health_heart_single_border.png" id="4_heart"]
+[ext_resource type="Texture2D" uid="uid://xtisf0m4hgta" path="res://Assets/ui/hud/energy_medallion_single_border.png" id="5_energy"]
+[ext_resource type="Shader" uid="uid://4ax0gvetbok0" path="res://Assets/ui/hud/icon_gold_match.gdshader" id="6_icon_gold"]
+[ext_resource type="Texture2D" uid="uid://bfu4pwl8th074" path="res://Assets/tiles/player.png" id="7_player_sheet"]
+[ext_resource type="Shader" uid="uid://chdrwel8lsxt2" path="res://Assets/ui/hud/kuya_head_sharpen.gdshader" id="8_portrait_sharpen"]
+
+[sub_resource type="StyleBoxFlat" id="PortraitFrameStyle"]
+bg_color = Color(0.31, 0.255, 0.23, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.7412, 0.5569, 0.3176, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="ShaderMaterial" id="PortraitSharpenMaterial"]
+shader = ExtResource("8_portrait_sharpen")
+
+[sub_resource type="AtlasTexture" id="KuyaPortrait"]
+atlas = ExtResource("7_player_sheet")
+region = Rect2(1016, 798, 76, 73)
+filter_clip = true
+
+[sub_resource type="ShaderMaterial" id="HealthIconMaterial"]
+shader = ExtResource("6_icon_gold")
+shader_parameter/is_energy = false
+
+[sub_resource type="AtlasTexture" id="HeartCrop"]
+atlas = ExtResource("4_heart")
+region = Rect2(279, 326, 704, 658)
+filter_clip = true
+
+[sub_resource type="StyleBoxFlat" id="BarFrame"]
+bg_color = Color(0.31, 0.22, 0.18, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.7412, 0.5569, 0.3176, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="BarEmpty"]
+bg_color = Color(0.31, 0.22, 0.18, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="HealthFill"]
+bg_color = Color(0.69, 0.16, 0.19, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="ShaderMaterial" id="EnergyIconMaterial"]
+shader = ExtResource("6_icon_gold")
+shader_parameter/is_energy = true
+
+[sub_resource type="AtlasTexture" id="EnergyCrop"]
+atlas = ExtResource("5_energy")
+region = Rect2(261, 224, 741, 760)
+filter_clip = true
+
+[sub_resource type="StyleBoxFlat" id="EnergyFill"]
+bg_color = Color(0.08, 0.5, 0.52, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[node name="StatusHUD" type="Control" unique_id=618409305]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 503.0
+offset_bottom = 160.0
+scale = Vector2(0.94, 0.94)
+mouse_filter = 2
+script = ExtResource("1_script")
+
+[node name="PortraitFrame" type="Panel" parent="." unique_id=2002495072]
+layout_mode = 0
+offset_right = 144.0
+offset_bottom = 144.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("PortraitFrameStyle")
+
+[node name="Portrait" type="TextureRect" parent="PortraitFrame" unique_id=2076771137]
+texture_filter = 1
+material = SubResource("PortraitSharpenMaterial")
+layout_mode = 0
+offset_left = 6.382979
+offset_top = 7.446809
+offset_right = 141.48936
+offset_bottom = 144.89362
+mouse_filter = 2
+texture = SubResource("KuyaPortrait")
+expand_mode = 1
+stretch_mode = 5
+flip_h = true
+
+[node name="CornerUpperLeft" type="ColorRect" parent="PortraitFrame" unique_id=1913090946]
+layout_mode = 0
+offset_left = -3.0
+offset_top = 10.0
+offset_right = 10.0
+offset_bottom = 29.0
+mouse_filter = 2
+color = Color(0.7412, 0.5569, 0.3176, 1)
+
+[node name="CornerUpperLeftInset" type="ColorRect" parent="PortraitFrame" unique_id=1732774207]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 14.0
+offset_right = 6.0
+offset_bottom = 25.0
+mouse_filter = 2
+color = Color(0.31, 0.255, 0.23, 1)
+
+[node name="CornerUpperRight" type="ColorRect" parent="PortraitFrame" unique_id=1944411370]
+layout_mode = 0
+offset_left = 134.0
+offset_top = 10.0
+offset_right = 147.0
+offset_bottom = 29.0
+mouse_filter = 2
+color = Color(0.7412, 0.5569, 0.3176, 1)
+
+[node name="CornerUpperRightInset" type="ColorRect" parent="PortraitFrame" unique_id=564371210]
+layout_mode = 0
+offset_left = 138.0
+offset_top = 14.0
+offset_right = 143.0
+offset_bottom = 25.0
+mouse_filter = 2
+color = Color(0.31, 0.255, 0.23, 1)
+
+[node name="CornerLowerLeft" type="ColorRect" parent="PortraitFrame" unique_id=1251308663]
+layout_mode = 0
+offset_left = -3.0
+offset_top = 115.0
+offset_right = 10.0
+offset_bottom = 134.0
+mouse_filter = 2
+color = Color(0.7412, 0.5569, 0.3176, 1)
+
+[node name="CornerLowerLeftInset" type="ColorRect" parent="PortraitFrame" unique_id=1511947510]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 119.0
+offset_right = 6.0
+offset_bottom = 130.0
+mouse_filter = 2
+color = Color(0.31, 0.255, 0.23, 1)
+
+[node name="CornerLowerRight" type="ColorRect" parent="PortraitFrame" unique_id=1922860752]
+layout_mode = 0
+offset_left = 134.0
+offset_top = 115.0
+offset_right = 147.0
+offset_bottom = 134.0
+mouse_filter = 2
+color = Color(0.7412, 0.5569, 0.3176, 1)
+
+[node name="CornerLowerRightInset" type="ColorRect" parent="PortraitFrame" unique_id=444664395]
+layout_mode = 0
+offset_left = 138.0
+offset_top = 119.0
+offset_right = 143.0
+offset_bottom = 130.0
+mouse_filter = 2
+color = Color(0.31, 0.255, 0.23, 1)
+
+[node name="BottomEmblem" type="ColorRect" parent="PortraitFrame" unique_id=1645343534]
+layout_mode = 0
+offset_left = 59.0
+offset_top = 136.0
+offset_right = 85.0
+offset_bottom = 154.0
+mouse_filter = 2
+color = Color(0.7412, 0.5569, 0.3176, 1)
+
+[node name="BottomEmblemInset" type="ColorRect" parent="PortraitFrame" unique_id=1458181314]
+layout_mode = 0
+offset_left = 63.0
+offset_top = 140.0
+offset_right = 81.0
+offset_bottom = 150.0
+mouse_filter = 2
+color = Color(0.31, 0.255, 0.23, 1)
+
+[node name="BottomEmblemMark" type="ColorRect" parent="PortraitFrame" unique_id=1708260286]
+layout_mode = 0
+offset_left = 69.0
+offset_top = 142.0
+offset_right = 75.0
+offset_bottom = 148.0
+mouse_filter = 2
+color = Color(0.7412, 0.5569, 0.3176, 1)
+
+[node name="HealthIcon" type="TextureRect" parent="." unique_id=904333230]
+z_index = 1
+texture_filter = 1
+material = SubResource("HealthIconMaterial")
+layout_mode = 0
+offset_left = 146.0
+offset_top = 21.0
+offset_right = 200.0
+offset_bottom = 75.0
+mouse_filter = 2
+texture = SubResource("HeartCrop")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="HeartGlint" type="ColorRect" parent="HealthIcon" unique_id=454224320]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 15.0
+offset_right = 22.0
+offset_bottom = 19.0
+mouse_filter = 2
+color = Color(1, 0.57, 0.59, 0.9)
+
+[node name="HeartGlintTip" type="ColorRect" parent="HealthIcon" unique_id=498537936]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 20.0
+offset_right = 16.0
+offset_bottom = 22.0
+mouse_filter = 2
+color = Color(1, 0.57, 0.59, 0.7)
+
+[node name="HealthFrame" type="Panel" parent="." unique_id=1943757238]
+layout_mode = 0
+offset_left = 186.0
+offset_top = 31.0
+offset_right = 473.0
+offset_bottom = 62.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("BarFrame")
+
+[node name="HealthBar" type="ProgressBar" parent="HealthFrame" unique_id=925204157]
+layout_mode = 0
+offset_left = 3.3617096
+offset_top = 3.042553
+offset_right = 284.21277
+offset_bottom = 28.574467
+mouse_filter = 2
+theme_override_styles/background = SubResource("BarEmpty")
+theme_override_styles/fill = SubResource("HealthFill")
+max_value = 150.0
+value = 150.0
+show_percentage = false
+
+[node name="HealthValue" type="Label" parent="HealthFrame" unique_id=750902301]
+layout_mode = 0
+offset_left = 165.06384
+offset_top = -1.2127647
+offset_right = 275.70212
+offset_bottom = 30.0
+theme_override_colors/font_color = Color(1, 0.94, 0.84, 1)
+theme_override_colors/font_outline_color = Color(0.05, 0.025, 0.025, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 17
+text = "150/150"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="HealthLabel" type="Label" parent="." unique_id=1874183376]
+layout_mode = 0
+offset_left = 198.93617
+offset_top = 10.638298
+offset_right = 308.93616
+offset_bottom = 37.638298
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.06, 0.04, 0.04, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 19
+text = "Vida"
+
+[node name="EnergyIcon" type="TextureRect" parent="." unique_id=564500378]
+z_index = 1
+texture_filter = 1
+material = SubResource("EnergyIconMaterial")
+layout_mode = 0
+offset_left = 148.0
+offset_top = 79.0
+offset_right = 202.0
+offset_bottom = 133.0
+mouse_filter = 2
+texture = SubResource("EnergyCrop")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="EnergyGlint" type="ColorRect" parent="EnergyIcon" unique_id=1666233890]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 16.0
+offset_right = 25.0
+offset_bottom = 20.0
+mouse_filter = 2
+color = Color(0.44, 0.84, 0.86, 0.9)
+
+[node name="EnergyGlintTip" type="ColorRect" parent="EnergyIcon" unique_id=992264935]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 21.0
+offset_right = 19.0
+offset_bottom = 23.0
+mouse_filter = 2
+color = Color(0.44, 0.84, 0.86, 0.7)
+
+[node name="EnergyFrame" type="Panel" parent="." unique_id=1667025044]
+layout_mode = 0
+offset_left = 186.0
+offset_top = 87.23405
+offset_right = 376.59573
+offset_bottom = 120.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("BarFrame")
+
+[node name="EnergyBar" type="ProgressBar" parent="EnergyFrame" unique_id=2017027542]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 3.1914825
+offset_right = 188.46808
+offset_bottom = 29.787231
+mouse_filter = 2
+theme_override_styles/background = SubResource("BarEmpty")
+theme_override_styles/fill = SubResource("EnergyFill")
+value = 100.0
+show_percentage = false
+
+[node name="EnergyValue" type="Label" parent="EnergyFrame" unique_id=1110359224]
+layout_mode = 0
+offset_left = 77.82981
+offset_top = 1.4255335
+offset_right = 177.8511
+offset_bottom = 30.425533
+theme_override_colors/font_color = Color(0.9, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.025, 0.04, 0.04, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 17
+text = "100/100"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="EnergyLabel" type="Label" parent="." unique_id=1506788558]
+layout_mode = 0
+offset_left = 201.06383
+offset_top = 67.02128
+offset_right = 341.06384
+offset_bottom = 94.02128
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.05, 0.035, 0.035, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 19
+text = "Energía"
