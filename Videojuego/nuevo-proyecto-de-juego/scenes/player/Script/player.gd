@@ -36,6 +36,8 @@ func _ready() -> void:
 	energy = max_energy
 	animation_tree.set_active(true)
 	calculate_stats()
+	add_to_group("player")
+	current_health = max_health
 	_emit_stats()
 
 func _unhandled_input(event: InputEvent) -> void:
