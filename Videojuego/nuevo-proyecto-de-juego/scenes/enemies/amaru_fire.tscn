@@ -1,0 +1,91 @@
+[gd_scene format=3 uid="uid://bi3rlsjuwybbu"]
+
+[ext_resource type="Script" uid="uid://bis1lafn4mad5" path="res://scripts/enemies/amaru_fire.gd" id="1_3vwpv"]
+[ext_resource type="Texture2D" uid="uid://byuohecoyj6m2" path="res://Assets/enemies/animations/fire.png" id="1_ub0k0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3vwpv"]
+atlas = ExtResource("1_ub0k0")
+region = Rect2(0, 0, 600, 670)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rgbul"]
+atlas = ExtResource("1_ub0k0")
+region = Rect2(600, 0, 600, 670)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lf2hg"]
+atlas = ExtResource("1_ub0k0")
+region = Rect2(1200, 0, 600, 670)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gitvk"]
+atlas = ExtResource("1_ub0k0")
+region = Rect2(1800, 0, 600, 670)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_joyfq"]
+atlas = ExtResource("1_ub0k0")
+region = Rect2(0, 670, 600, 670)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u6r8t"]
+atlas = ExtResource("1_ub0k0")
+region = Rect2(600, 670, 600, 670)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ndbwx"]
+atlas = ExtResource("1_ub0k0")
+region = Rect2(1200, 670, 600, 670)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ej3g2"]
+atlas = ExtResource("1_ub0k0")
+region = Rect2(1800, 670, 600, 670)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3c2fn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3vwpv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rgbul")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lf2hg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gitvk")
+}],
+"loop": 1,
+"name": &"fly",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_joyfq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u6r8t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ndbwx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ej3g2")
+}],
+"loop": 0,
+"name": &"hit",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fdm2o"]
+radius = 12.0
+
+[node name="AmaruFire" type="Area2D" unique_id=1520340828]
+collision_layer = 0
+collision_mask = 32
+script = ExtResource("1_3vwpv")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1635197115]
+texture_filter = 1
+scale = Vector2(0.12, 0.12)
+sprite_frames = SubResource("SpriteFrames_3c2fn")
+animation = &"fly"
+offset = Vector2(-132, -50)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1742004245]
+shape = SubResource("CircleShape2D_fdm2o")

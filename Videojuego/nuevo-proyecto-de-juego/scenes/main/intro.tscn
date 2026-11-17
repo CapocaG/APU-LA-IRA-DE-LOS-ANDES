@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://bc3stpweh0u4n"]
+
+[ext_resource type="Script" uid="uid://8b64rbstn61l" path="res://scripts/main/intro.gd" id="1_slfw7"]
+[ext_resource type="VideoStream" uid="uid://cfnmkfe5vv245" path="res://Assets/videos/intro_godot.ogv" id="2_slfw7"]
+
+[node name="Intro" type="Control" unique_id=618542168]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_slfw7")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=804598916]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="VideoPlayer" type="VideoStreamPlayer" parent="." unique_id=1700841341]
+texture_filter = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stream = ExtResource("2_slfw7")
+autoplay = true
+expand = true
+
+[node name="Label" type="Label" parent="." unique_id=690445944]
+layout_mode = 0
+offset_left = 915.0
+offset_top = 625.0
+offset_right = 1178.0
+offset_bottom = 648.0
+text = "Presiona Espacio o Clic para saltar"

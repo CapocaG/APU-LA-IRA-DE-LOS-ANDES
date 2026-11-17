@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bol5sjr0tbmmd"]
 
 [ext_resource type="Script" uid="uid://dv7lyjbn0hxvn" path="res://scripts/ui/status_hud.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://cxkbsqm1iabfk" path="res://Assets/ui/barra/marco_vida.png" id="2_k4acc"]
 [ext_resource type="Texture2D" uid="uid://dtsc8yuts6815" path="res://Assets/ui/hud/health_heart_single_border.png" id="4_heart"]
 [ext_resource type="Texture2D" uid="uid://xtisf0m4hgta" path="res://Assets/ui/hud/energy_medallion_single_border.png" id="5_energy"]
 [ext_resource type="Shader" uid="uid://4ax0gvetbok0" path="res://Assets/ui/hud/icon_gold_match.gdshader" id="6_icon_gold"]
@@ -88,6 +89,16 @@ offset_bottom = 160.0
 scale = Vector2(0.94, 0.94)
 mouse_filter = 2
 script = ExtResource("1_script")
+
+[node name="VignetteOverlay" type="TextureRect" parent="." unique_id=1499339285]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = -20.212765
+offset_top = -17.021276
+offset_right = 1354.2554
+offset_bottom = 746.8085
+texture = ExtResource("2_k4acc")
+expand_mode = 1
 
 [node name="PortraitFrame" type="Panel" parent="." unique_id=2002495072]
 layout_mode = 0
