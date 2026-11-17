@@ -42,6 +42,7 @@
 [ext_resource type="PackedScene" uid="uid://b8l5kqvcy2tdt" path="res://scenes/enemies/illapa_enemy.tscn" id="40_j4b7n"]
 [ext_resource type="PackedScene" uid="uid://bol5sjr0tbmmd" path="res://scenes/ui/status_hud.tscn" id="41_lxhnx"]
 [ext_resource type="Texture2D" uid="uid://bqruwufl1tw34" path="res://Assets/effects/luz_radial_suave.png" id="41_o0x22"]
+[ext_resource type="PackedScene" uid="uid://c1cel8p48oypl" path="res://scenes/enemies/amaru_enemy.tscn" id="43_hm8c6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_u7l0e"]
 texture = ExtResource("1_ao1bm")
@@ -2376,8 +2377,15 @@ tile_set = SubResource("TileSet_uoar7")
 
 [node name="Player" parent="." unique_id=893648857 instance=ExtResource("10_0ph2d")]
 position = Vector2(67, 246)
+speed = 480
+attack_damage = 60
+hitpoints = 150
+max_energy = 100.0
+sprint_multiplier = 1.25
+sprint_energy_per_second = 18.0
+energy_regeneration_per_second = 6.0
+attack_energy_cost = 12.0
 
-[node name="HUD" parent="." unique_id=664568007 instance=ExtResource("37_uys8k")]
 [node name="TemploNav" type="NavigationRegion2D" parent="." unique_id=739988362]
 navigation_polygon = ExtResource("37_uys8k")
 
@@ -2487,3 +2495,6 @@ texture_scale = 1.2
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1985039605]
 color = Color(0.69803923, 0.7137255, 0.8156863, 1)
+
+[node name="Amaru_enemy" parent="." unique_id=1558502850 instance=ExtResource("43_hm8c6")]
+position = Vector2(2015, -921)
