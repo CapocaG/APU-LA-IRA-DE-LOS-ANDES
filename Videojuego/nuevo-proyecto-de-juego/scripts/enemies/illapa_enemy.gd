@@ -26,6 +26,11 @@ const BOLT_SCENE: PackedScene = preload("res://scenes/enemies/illapa_bolt.tscn")
 @onready var health_bar: ProgressBar = $HealthBar
 @onready var body_shape: CollisionShape2D = $CollisionShape2D
 
+@export var drop_scene: PackedScene
+@export_range(0.0, 1.0) var drop_chance: float = 0.7
+@export var drop_random_common: bool = true
+@export_enum("COCA", "CHICHA_DE_JORA", "ILLA", "QUIPU", "ESCAMA_DE_AMARU", "FRAGMENTO_DE_ILLAPA", "SEMILLA_DE_PACHAMAMA") var specific_drop: int = 0
+
 var state: State = State.IDLE
 var home_position: Vector2
 var player: CharacterBody2D
@@ -210,10 +215,12 @@ func _die() -> void:
 	hit_box.set_deferred("monitoring", false)
 	detection_area.set_deferred("monitoring", false)
 	body_shape.set_deferred("disabled", true)
+	health_bar.hide()
 	sprite.flip_h = false
 	_play(&"death")
 	await _wait_animation(&"death")
 	if is_inside_tree():
+		_spawn_drop()
 		died.emit(exp_reward)
 		queue_free()
 
@@ -238,3 +245,13 @@ func _on_detection_body_exited(body: Node2D) -> void:
 func _on_hit_box_area_entered(area: Area2D) -> void:
 	if state == State.MELEE and _living_target() and area.owner == player:
 		_apply_melee_damage(player)
+
+func _spawn_drop() -> void:
+	if drop_scene == null or randf() > drop_chance:
+		return
+	var item := drop_scene.instantiate()
+	item.global_position = global_position
+	item.randomize_common_on_spawn = drop_random_common
+	if not drop_random_common:
+		item.power_type = specific_drop
+	get_parent().call_deferred("add_child", item)

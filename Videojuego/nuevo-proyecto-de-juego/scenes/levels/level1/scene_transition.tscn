@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://bgvdclqng717p"]
+
+[ext_resource type="Script" uid="uid://b4kej581pt8d4" path="res://scenes/levels/level1/scene_transition.gd" id="1_pt2ts"]
+
+[node name="SceneTransition" type="CanvasLayer" unique_id=1493112852]
+layer = 100
+script = ExtResource("1_pt2ts")
+
+[node name="FadeRect" type="ColorRect" parent="." unique_id=1770330723]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.023529412, 0.03529412, 0.07450981, 1)
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="." unique_id=639879188]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand = true
+
+[node name="LevelTitle" type="Label" parent="." unique_id=783313408]
+modulate = Color(1, 1, 1, 0)
+offset_left = 420.0
+offset_top = 576.0
+offset_right = 903.0
+offset_bottom = 757.0
+theme_override_font_sizes/font_size = 28
+text = "PENSASTE QUE ESO ERA TODO"

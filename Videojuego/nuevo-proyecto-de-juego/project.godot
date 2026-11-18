@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 PlayerData="*uid://cww2yi7dlr33b"
 LevelData="*uid://22yp63thhtfb"
+SceneTransition="*uid://bgvdclqng717p"
 
 [display]
 

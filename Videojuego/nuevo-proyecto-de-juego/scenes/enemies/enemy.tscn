@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dbqrusg0ei35v" path="res://scripts/enemies/enemy.gd" id="1_8e3ao"]
 [ext_resource type="Texture2D" uid="uid://bb302b0ihgwus" path="res://Assets/enemies/animations/Guardian_piedra.png" id="2_8e3ao"]
+[ext_resource type="PackedScene" uid="uid://dlvgaavtmqxlj" path="res://scenes/player/power_up.tscn" id="2_38ino"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fdm2o"]
 radius = 30.0
@@ -413,6 +414,9 @@ size = Vector2(31.40219, 107.68225)
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_8e3ao")
+drop_scene = ExtResource("2_38ino")
+drop_chance = 0.5
+specific_drop = 6
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=242315533]
 position = Vector2(5, -62)

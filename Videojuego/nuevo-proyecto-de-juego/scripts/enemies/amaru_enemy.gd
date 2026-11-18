@@ -1,6 +1,8 @@
 extends CharacterBody2D
 
-@export var max_health: int = 90
+signal died(exp_reward: int)
+
+@export var max_health: int = 180
 @export var move_speed: float = 55.0
 @export var preferred_distance: float = 150.0
 @export var melee_distance: float = 55.0
@@ -15,6 +17,11 @@ extends CharacterBody2D
 @onready var detection_area: Area2D = $DetectionArea
 @onready var attack_timer: Timer = $AttackTimer
 @onready var health_bar: Range = $HealthBar
+
+@export var drop_scene: PackedScene
+@export_range(0.0, 1.0) var drop_chance: float = 0.7
+@export var drop_random_common: bool = true
+@export_enum("COCA", "CHICHA_DE_JORA", "ILLA", "QUIPU", "ESCAMA_DE_AMARU", "FRAGMENTO_DE_ILLAPA", "SEMILLA_DE_PACHAMAMA") var specific_drop: int = 0
 
 var hp: int
 var target_player: Node2D = null
@@ -144,7 +151,10 @@ func take_damage(amount: int) -> void:
 			health_bar.visible = false
 		anim_player.play("death")
 		await anim_player.animation_finished
-		queue_free()
+		if is_inside_tree():
+			_spawn_drop()
+			died.emit(exp_reward)
+			queue_free()
 	else:
 		is_hurt = true
 		is_attacking = false
@@ -163,3 +173,13 @@ func _on_detection_body_entered(body: Node2D) -> void:
 func _on_detection_body_exited(body: Node2D) -> void:
 	if body == target_player:
 		target_player = null
+
+func _spawn_drop() -> void:
+	if drop_scene == null or randf() > drop_chance:
+		return
+	var item := drop_scene.instantiate()
+	item.global_position = global_position
+	item.randomize_common_on_spawn = drop_random_common
+	if not drop_random_common:
+		item.power_type = specific_drop
+	get_parent().call_deferred("add_child", item)

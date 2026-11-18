@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://c67tgkfvs64dq" path="res://scripts/enemies/amaru_enemy.gd" id="1_l616a"]
 [ext_resource type="Texture2D" uid="uid://3fh6rxi6027y" path="res://Assets/enemies/animations/Amaru_apu.png" id="1_pla8l"]
 [ext_resource type="PackedScene" uid="uid://bi3rlsjuwybbu" path="res://scenes/enemies/amaru_fire.tscn" id="2_1wavo"]
+[ext_resource type="PackedScene" uid="uid://dlvgaavtmqxlj" path="res://scenes/player/power_up.tscn" id="3_utkjw"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fdm2o"]
 radius = 30.0
@@ -205,6 +206,10 @@ corner_radius_bottom_left = 4
 motion_mode = 1
 script = ExtResource("1_l616a")
 fire_scene = ExtResource("2_1wavo")
+drop_scene = ExtResource("3_utkjw")
+drop_chance = 0.1
+drop_random_common = false
+specific_drop = 4
 
 [node name="Shadow" type="Polygon2D" parent="." unique_id=1591634832]
 color = Color(0.015, 0.025, 0.04, 0.37)

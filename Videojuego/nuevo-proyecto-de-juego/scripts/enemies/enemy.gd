@@ -29,6 +29,11 @@ var attack_hit_registered: bool = false
 var player: CharacterBody2D
 @onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
 
+@export var drop_scene: PackedScene
+@export_range(0.0, 1.0) var drop_chance: float = 0.7
+@export var drop_random_common: bool = true
+@export_enum("COCA", "CHICHA_DE_JORA", "ILLA", "QUIPU", "ESCAMA_DE_AMARU", "FRAGMENTO_DE_ILLAPA", "SEMILLA_DE_PACHAMAMA") var specific_drop: int = 0
+
 func _ready() -> void:
 	animation_tree.set_active(true)
 
@@ -120,16 +125,39 @@ func _apply_attack_hit(target: Node) -> void:
 	target.take_damage(attack_damage)
 
 func take_damage(damage_taken: int) -> void:
+	if state == State.DEAD:
+		return
 	hitpoints -= damage_taken
 	if hitpoints <= 0:
 		death()
-		
+
 func death() -> void:
+	if state == State.DEAD:
+		return
+	state = State.DEAD
+	velocity = Vector2.ZERO
+	animation_tree.set_active(false)
+	if has_node("CollisionShape2D"):
+		$CollisionShape2D.set_deferred("disabled", true)
+	if has_node("HurtBox/CollisionShape2D"):
+		$HurtBox/CollisionShape2D.set_deferred("disabled", true)
 	died.emit(exp_reward)
 	$AnimationPlayer.play("death")
 	await $AnimationPlayer.animation_finished
-	queue_free()
+	if is_inside_tree():
+		_spawn_drop()
+		queue_free()
 
 func _on_hit_box_area_entered(area: Area2D) -> void:
 	if state == State.ATTACK and area.owner == player:
 		_apply_attack_hit(player)
+		
+func _spawn_drop() -> void:
+	if drop_scene == null or randf() > drop_chance:
+		return
+	var item := drop_scene.instantiate()
+	item.global_position = global_position
+	item.randomize_common_on_spawn = drop_random_common
+	if not drop_random_common:
+		item.power_type = specific_drop
+	get_parent().call_deferred("add_child", item)

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://b8l5kqvcy2tdt"]
 
 [ext_resource type="Script" uid="uid://jghpu6o5xss0" path="res://scripts/enemies/illapa_enemy.gd" id="1_ok32o"]
+[ext_resource type="PackedScene" uid="uid://dlvgaavtmqxlj" path="res://scenes/player/power_up.tscn" id="2_c565m"]
 [ext_resource type="Texture2D" uid="uid://dui6e7i54fv0d" path="res://Assets/enemies/animations/Illapa_animation.png" id="2_v57r2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_s8xyh"]
@@ -316,6 +317,10 @@ collision_layer = 2
 collision_mask = 3
 motion_mode = 1
 script = ExtResource("1_ok32o")
+drop_scene = ExtResource("2_c565m")
+drop_chance = 0.1
+drop_random_common = false
+specific_drop = 5
 
 [node name="Shadow" type="Polygon2D" parent="." unique_id=432978146]
 color = Color(0.015, 0.025, 0.04, 0.37)
