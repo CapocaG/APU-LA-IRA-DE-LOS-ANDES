@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://dlvgaavtmqxlj"]
+
+[ext_resource type="Script" uid="uid://bhf4c1oci5gwn" path="res://scenes/player/Script/power_up.gd" id="1_f85wv"]
+[ext_resource type="Texture2D" uid="uid://deeq43dli408h" path="res://Assets/items/coca_reference.png" id="2_pdpsf"]
+[ext_resource type="Texture2D" uid="uid://d2fjicmr360fl" path="res://Assets/items/cicha_reference.png" id="3_y5jp0"]
+[ext_resource type="Texture2D" uid="uid://dxkjnqerpl48" path="res://Assets/items/illa_reference.png" id="4_ouns0"]
+[ext_resource type="Texture2D" uid="uid://dxxa0c56dcd4o" path="res://Assets/items/quipu_reference.png" id="5_i4orc"]
+[ext_resource type="Texture2D" uid="uid://b1rc6jnsyxklh" path="res://Assets/items/escama_reference.png" id="6_ktlss"]
+[ext_resource type="Texture2D" uid="uid://c0nl7artlnchf" path="res://Assets/items/semilla_reference.png" id="7_w0ijd"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_h0s6k"]
+radius = 16.0
+
+[node name="PowerUp" type="Area2D" unique_id=2069332180]
+collision_layer = 0
+collision_mask = 32
+script = ExtResource("1_f85wv")
+icon_size_px = 64.0
+tex_coca = ExtResource("2_pdpsf")
+tex_chicha = ExtResource("3_y5jp0")
+tex_illa = ExtResource("4_ouns0")
+tex_quipu = ExtResource("5_i4orc")
+tex_escama_amaru = ExtResource("6_ktlss")
+tex_fragmento_illapa = ExtResource("4_ouns0")
+tex_semilla_pachamama = ExtResource("7_w0ijd")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1965557958]
+texture_filter = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1362355351]
+shape = SubResource("CircleShape2D_h0s6k")

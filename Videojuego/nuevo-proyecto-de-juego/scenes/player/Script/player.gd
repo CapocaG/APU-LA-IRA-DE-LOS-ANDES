@@ -31,6 +31,8 @@ var energy: float = 100.0
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var animation_playback: AnimationNodeStateMachinePlayback = $AnimationTree["parameters/playback"] 
 
+var damage_multiplier_taken: float = 1.0
+
 func _ready() -> void:
 	hitpoints_max = hitpoints
 	energy = max_energy
@@ -143,7 +145,8 @@ func _emit_stats() -> void:
 func take_damage(damage_taken: int) -> void:
 	if state == State.DEAD or damage_taken <= 0:
 		return
-	hitpoints = maxi(0, hitpoints - damage_taken)
+	var final_damage: int = maxi(1, int(round(damage_taken * damage_multiplier_taken)))
+	hitpoints = maxi(0, hitpoints - final_damage)
 	_emit_stats()
 	if hitpoints <= 0:
 		death()
@@ -171,3 +174,60 @@ func death() -> void:
 func _on_hit_box_area_entered(area: Area2D) -> void:
 	if not is_dead() and area.owner != null and area.owner.has_method("take_damage"):
 		area.owner.take_damage(attack_damage)
+
+func apply_powerup(item_name: String) -> void:
+	match item_name:
+		"COCA":
+			# Cura 35 de vida y recupera 30 de energía usando tus propias funciones
+			heal(35)
+			restore_energy(30.0)
+		"CHICHA_DE_JORA":
+			# Aumenta velocidad de movimiento (+35%) por 8 segundos
+			var bonus_speed: int = int(speed * 0.35)
+			speed += bonus_speed
+			modulate = Color(1.0, 0.9, 0.55)
+			await get_tree().create_timer(8.0).timeout
+			speed -= bonus_speed
+			modulate = Color.WHITE
+		"ILLA":
+			# Piedra Sagrada: reduce el daño recibido a la mitad por 10 segundos
+			damage_multiplier_taken = 0.5
+			modulate = Color(0.55, 0.95, 1.0)
+			await get_tree().create_timer(10.0).timeout
+			damage_multiplier_taken = 1.0
+			modulate = Color.WHITE
+		"QUIPU":
+			# Restaura toda la energía y aumenta la regeneración por 10 segundos
+			restore_energy(max_energy)
+			var bonus_regen: float = 10.0
+			energy_regeneration_per_second += bonus_regen
+			modulate = Color(0.85, 0.75, 1.0)
+			await get_tree().create_timer(10.0).timeout
+			energy_regeneration_per_second -= bonus_regen
+			modulate = Color.WHITE
+		"ESCAMA_DE_AMARU":
+			# Mejora permanente de daño de ataque
+			attack_damage += 15
+		"FRAGMENTO_DE_ILLAPA":
+			# Mejora permanente de velocidad y energía máxima
+			speed += 45
+			max_energy += 20.0
+			restore_energy(20.0)
+		"SEMILLA_DE_PACHAMAMA":
+			# Mejora permanente de vida máxima y curación completa
+			hitpoints_max += 30
+			hitpoints = hitpoints_max
+			_emit_stats()
+	
+func load_stats_from_global() -> void:
+	attack_damage += PlayerData.bonus_damage
+	speed += PlayerData.bonus_speed
+	hitpoints += PlayerData.bonus_max_hp
+	max_energy += PlayerData.bonus_max_energy
+
+func save_stats_to_global() -> void:
+	# Guarda solo los incrementos acumulados respecto a los valores base (60, 480, 150, 100.0)
+	PlayerData.bonus_damage = attack_damage - 60
+	PlayerData.bonus_speed = speed - 480
+	PlayerData.bonus_max_hp = hitpoints_max - 150
+	PlayerData.bonus_max_energy = max_energy - 100.0
