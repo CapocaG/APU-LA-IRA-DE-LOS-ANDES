@@ -2,6 +2,10 @@
 
 [ext_resource type="Texture2D" uid="uid://bfu4pwl8th074" path="res://Assets/tiles/player.png" id="1_8afob"]
 [ext_resource type="Script" uid="uid://b7biue26kku11" path="res://scenes/player/Script/player.gd" id="1_dovo2"]
+[ext_resource type="AudioStream" uid="uid://bdo13wqotth1e" path="res://Assets/audio/SFX/attack.wav" id="3_lvxji"]
+[ext_resource type="AudioStream" uid="uid://ssijqa6vo672" path="res://Assets/audio/SFX/caminar.wav" id="4_p47bc"]
+[ext_resource type="AudioStream" uid="uid://4o5behkvce1e" path="res://Assets/audio/SFX/daño.wav" id="5_75vfm"]
+[ext_resource type="AudioStream" uid="uid://bo02loq6qqgwn" path="res://Assets/audio/SFX/agarrar.wav" id="6_0owmy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fdm2o"]
 radius = 25.0
@@ -528,5 +532,21 @@ monitorable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=1519932540]
 position = Vector2(2.2560349, -18)
 shape = SubResource("RectangleShape2D_e6yk2")
+
+[node name="AttackSFX" type="AudioStreamPlayer2D" parent="." unique_id=683836264]
+stream = ExtResource("3_lvxji")
+bus = &"SFX"
+
+[node name="WalkingSFX" type="AudioStreamPlayer2D" parent="." unique_id=1101191903]
+stream = ExtResource("4_p47bc")
+bus = &"SFX"
+
+[node name="HurtSFX" type="AudioStreamPlayer2D" parent="." unique_id=438231706]
+stream = ExtResource("5_75vfm")
+bus = &"SFX"
+
+[node name="PickupSFX" type="AudioStreamPlayer2D" parent="." unique_id=839256054]
+stream = ExtResource("6_0owmy")
+bus = &"SFX"
 
 [connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]

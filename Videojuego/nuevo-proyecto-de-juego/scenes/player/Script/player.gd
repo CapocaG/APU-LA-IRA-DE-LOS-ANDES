@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-signal game_over(victoria:bool)
+signal game_over(victoria: bool)
 signal update_hp_bar(hp_bar_value: int)
 signal stats_changed(health: int, max_health: int, current_energy: float, max_energy: float)
 
@@ -12,7 +12,7 @@ enum State {
 }
 
 @export_category("Stats")
-@export var speed: int=480
+@export var speed: int = 480
 @export var attack_damage: int = 60
 @export var hitpoints: int = 150
 @export var max_energy: float = 100.0
@@ -21,24 +21,40 @@ enum State {
 @export var energy_regeneration_per_second: float = 6.0
 @export var attack_energy_cost: float = 12.0
 
-var state: State =State.IDLE
-var move_direction: Vector2 = Vector2(0,0)
+var state: State = State.IDLE
+var move_direction: Vector2 = Vector2.ZERO
 var attack_speed: float
 var hitpoints_max: int
 var dialogue_active: bool = false
 var energy: float = 100.0
 
 @onready var animation_tree: AnimationTree = $AnimationTree
-@onready var animation_playback: AnimationNodeStateMachinePlayback = $AnimationTree["parameters/playback"] 
+@onready var animation_playback: AnimationNodeStateMachinePlayback = $AnimationTree["parameters/playback"]
+
+# Efectos de sonido de Kuya
+@onready var attack_sfx: AudioStreamPlayer2D = get_node_or_null("AttackSFX")
+@onready var walking_sfx: AudioStreamPlayer2D = get_node_or_null("WalkingSFX")
+@onready var hurt_sfx: AudioStreamPlayer2D = get_node_or_null("HurtSFX")
+@onready var pickup_sfx: AudioStreamPlayer2D = get_node_or_null("PickupSFX")
 
 var damage_multiplier_taken: float = 1.0
 
 func _ready() -> void:
+	load_stats_from_global()
 	hitpoints_max = hitpoints
 	energy = max_energy
 	animation_tree.set_active(true)
 	calculate_stats()
 	_emit_stats()
+
+func _play_sfx(sfx_node: AudioStreamPlayer2D, min_pitch: float = 0.92, max_pitch: float = 1.08) -> void:
+	if is_instance_valid(sfx_node) and sfx_node.stream != null:
+		sfx_node.pitch_scale = randf_range(min_pitch, max_pitch)
+		sfx_node.play()
+
+func _stop_walking_sfx() -> void:
+	if is_instance_valid(walking_sfx) and walking_sfx.playing:
+		walking_sfx.stop()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
@@ -51,24 +67,24 @@ func _physics_process(delta: float) -> void:
 		movement_loop(delta)
 	else:
 		_set_energy(energy + energy_regeneration_per_second * delta)
-		
+
 func set_dialogue_active(active: bool) -> void:
 	dialogue_active = active
 	if active:
 		_stop_movement()
-		
+
 func _stop_movement() -> void:
 	move_direction = Vector2.ZERO
 	velocity = Vector2.ZERO
+	_stop_walking_sfx()
 	if state != State.DEAD:
 		state = State.IDLE
 		update_animation()
-		
+
 func calculate_stats() -> void:
 	attack_speed = Equations.calculate_attack_speed()
-	var time_factor: float = Equations.BASE_ATTACK_SPEED / attack_speed 
+	var time_factor: float = Equations.BASE_ATTACK_SPEED / attack_speed
 	animation_tree.set("parameters/attack/TimeScale/scale", time_factor)
-	print("my new attack speed: ", attack_speed)
 
 func movement_loop(delta: float) -> void:
 	move_direction.x = int(Input.is_action_pressed("right")) - int(Input.is_action_pressed("left"))
@@ -80,21 +96,30 @@ func movement_loop(delta: float) -> void:
 	else:
 		_set_energy(energy + energy_regeneration_per_second * delta)
 	set_velocity(motion)
-	move_and_slide() 
-	
-	if state==State.IDLE or State.RUN:
+	move_and_slide()
+
+	if state == State.IDLE or state == State.RUN:
 		if move_direction.x < -0.01:
-			$Sprite2D.flip_h=true
+			$Sprite2D.flip_h = true
 		elif move_direction.x > 0.01:
-			$Sprite2D.flip_h=false
-	
-	if motion != Vector2.ZERO and state== State.IDLE:
+			$Sprite2D.flip_h = false
+
+	if motion != Vector2.ZERO and state == State.IDLE:
 		state = State.RUN
 		update_animation()
-	elif motion == Vector2.ZERO and state==State.RUN:
+	elif motion == Vector2.ZERO and state == State.RUN:
 		state = State.IDLE
 		update_animation()
-		
+
+	# Control del sonido de pasos al moverse
+	if is_instance_valid(walking_sfx) and walking_sfx.stream != null:
+		if state == State.RUN and motion != Vector2.ZERO:
+			if not walking_sfx.playing:
+				walking_sfx.pitch_scale = randf_range(0.95, 1.05)
+				walking_sfx.play()
+		else:
+			_stop_walking_sfx()
+
 func update_animation() -> void:
 	match state:
 		State.IDLE:
@@ -103,23 +128,25 @@ func update_animation() -> void:
 			animation_playback.travel("run")
 		State.ATTACK:
 			animation_playback.travel("attack")
-			
+
 func attack() -> void:
 	if state == State.ATTACK or state == State.DEAD or dialogue_active or energy < attack_energy_cost:
 		return
+	_stop_walking_sfx()
 	_set_energy(energy - attack_energy_cost)
 	state = State.ATTACK
-	
+	_play_sfx(attack_sfx, 0.90, 1.12)
+
 	var mouse_pas: Vector2 = get_global_mouse_position()
 	var attack_dir: Vector2 = (mouse_pas - global_position).normalized()
 	$Sprite2D.flip_h = attack_dir.x < 0 and abs(attack_dir.x) >= abs(attack_dir.y)
 	animation_tree.set("parameters/attack/BlendSpace2D/blend_position", attack_dir)
 	update_animation()
-	
+
 	await get_tree().create_timer(attack_speed).timeout
 	if state != State.DEAD:
 		state = State.IDLE
-	
+
 func heal(amount: int) -> void:
 	if state == State.DEAD or amount <= 0:
 		return
@@ -141,7 +168,7 @@ func _emit_stats() -> void:
 	stats_changed.emit(hitpoints, hitpoints_max, energy, max_energy)
 	@warning_ignore("integer_division")
 	update_hp_bar.emit((hitpoints * 100) / maxi(hitpoints_max, 1))
-	
+
 func take_damage(damage_taken: int) -> void:
 	if state == State.DEAD or damage_taken <= 0:
 		return
@@ -150,6 +177,8 @@ func take_damage(damage_taken: int) -> void:
 	_emit_stats()
 	if hitpoints <= 0:
 		death()
+	else:
+		_play_sfx(hurt_sfx, 0.88, 1.02)
 
 func is_dead() -> bool:
 	return state == State.DEAD or hitpoints <= 0
@@ -158,6 +187,7 @@ func death() -> void:
 	if state == State.DEAD:
 		return
 	state = State.DEAD
+	_stop_walking_sfx()
 	velocity = Vector2.ZERO
 	move_direction = Vector2.ZERO
 	animation_tree.active = false
@@ -176,13 +206,12 @@ func _on_hit_box_area_entered(area: Area2D) -> void:
 		area.owner.take_damage(attack_damage)
 
 func apply_powerup(item_name: String) -> void:
+	_play_sfx(pickup_sfx, 0.96, 1.06)
 	match item_name:
 		"COCA":
-			# Cura 35 de vida y recupera 30 de energía usando tus propias funciones
 			heal(35)
 			restore_energy(30.0)
 		"CHICHA_DE_JORA":
-			# Aumenta velocidad de movimiento (+35%) por 8 segundos
 			var bonus_speed: int = int(speed * 0.35)
 			speed += bonus_speed
 			modulate = Color(1.0, 0.9, 0.55)
@@ -190,14 +219,12 @@ func apply_powerup(item_name: String) -> void:
 			speed -= bonus_speed
 			modulate = Color.WHITE
 		"ILLA":
-			# Piedra Sagrada: reduce el daño recibido a la mitad por 10 segundos
 			damage_multiplier_taken = 0.5
 			modulate = Color(0.55, 0.95, 1.0)
 			await get_tree().create_timer(10.0).timeout
 			damage_multiplier_taken = 1.0
 			modulate = Color.WHITE
 		"QUIPU":
-			# Restaura toda la energía y aumenta la regeneración por 10 segundos
 			restore_energy(max_energy)
 			var bonus_regen: float = 10.0
 			energy_regeneration_per_second += bonus_regen
@@ -206,19 +233,20 @@ func apply_powerup(item_name: String) -> void:
 			energy_regeneration_per_second -= bonus_regen
 			modulate = Color.WHITE
 		"ESCAMA_DE_AMARU":
-			# Mejora permanente de daño de ataque
 			attack_damage += 15
+			PlayerData.bonus_damage += 15
 		"FRAGMENTO_DE_ILLAPA":
-			# Mejora permanente de velocidad y energía máxima
 			speed += 45
 			max_energy += 20.0
+			PlayerData.bonus_speed += 45
+			PlayerData.bonus_max_energy += 20.0
 			restore_energy(20.0)
 		"SEMILLA_DE_PACHAMAMA":
-			# Mejora permanente de vida máxima y curación completa
 			hitpoints_max += 30
 			hitpoints = hitpoints_max
+			PlayerData.bonus_max_hp += 30
 			_emit_stats()
-	
+
 func load_stats_from_global() -> void:
 	attack_damage += PlayerData.bonus_damage
 	speed += PlayerData.bonus_speed
@@ -226,7 +254,6 @@ func load_stats_from_global() -> void:
 	max_energy += PlayerData.bonus_max_energy
 
 func save_stats_to_global() -> void:
-	# Guarda solo los incrementos acumulados respecto a los valores base (60, 480, 150, 100.0)
 	PlayerData.bonus_damage = attack_damage - 60
 	PlayerData.bonus_speed = speed - 480
 	PlayerData.bonus_max_hp = hitpoints_max - 150

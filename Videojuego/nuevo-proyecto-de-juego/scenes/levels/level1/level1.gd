@@ -7,6 +7,8 @@ extends Node2D
 
 @onready var exit_portal: Area2D = $ExitPortal
 
+
+
 var enemies_remaining: int = 0
 var portal_unlocked: bool = false
 
