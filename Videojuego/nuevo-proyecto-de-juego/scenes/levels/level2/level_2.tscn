@@ -2444,6 +2444,7 @@ tile_map_data = PackedByteArray("AAANAAkAAAAAAAAAAADy//P/AAAAAAAAAADm/wsAAAAAAAA
 tile_set = SubResource("TileSet_osicj")
 
 [node name="PuenteAudio" type="AudioStreamPlayer2D" parent="." unique_id=494662676]
+position = Vector2(550, -60)
 stream = ExtResource("30_p48sp")
 autoplay = true
 max_distance = 450.0
