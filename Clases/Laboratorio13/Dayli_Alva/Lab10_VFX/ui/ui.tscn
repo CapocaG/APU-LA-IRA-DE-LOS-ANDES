@@ -1,0 +1,65 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://ui/ui_controller.gd" id="1_ui_controller"]
+[ext_resource type="PackedScene" path="res://ui/hud/hud.tscn" id="2_hud"]
+[ext_resource type="PackedScene" path="res://ui/inventory/InventoryPanel.tscn" id="3_inventory_panel"]
+[ext_resource type="PackedScene" path="res://ui/menus/PauseMenu.tscn" id="4_pause_menu"]
+[ext_resource type="PackedScene" path="res://ui/inventory/InventorySlot.tscn" id="5_inventory_slot"]
+[ext_resource type="Theme" path="res://ui/themes/game_theme.tres" id="6_theme"]
+
+[node name="UI" type="CanvasLayer"]
+script = ExtResource("1_ui_controller")
+
+[node name="HUD" parent="." instance=ExtResource("2_hud")]
+
+[node name="Hotbar" type="HBoxContainer" parent="."]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -68.0
+offset_bottom = -16.0
+alignment = 1
+theme_override_constants/separation = 6
+theme = ExtResource("6_theme")
+
+[node name="Slot0" parent="Hotbar" instance=ExtResource("5_inventory_slot")]
+layout_mode = 2
+
+[node name="Slot1" parent="Hotbar" instance=ExtResource("5_inventory_slot")]
+layout_mode = 2
+
+[node name="Slot2" parent="Hotbar" instance=ExtResource("5_inventory_slot")]
+layout_mode = 2
+
+[node name="Slot3" parent="Hotbar" instance=ExtResource("5_inventory_slot")]
+layout_mode = 2
+
+[node name="Slot4" parent="Hotbar" instance=ExtResource("5_inventory_slot")]
+layout_mode = 2
+
+[node name="InventoryPanel" parent="." instance=ExtResource("3_inventory_panel")]
+theme = ExtResource("6_theme")
+
+[node name="PauseMenu" parent="." instance=ExtResource("4_pause_menu")]
+
+[node name="NotificationLayer" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("6_theme")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="NotificationLayer"]
+anchors_preset = 1
+anchor_right = 1.0
+offset_left = 20.0
+offset_top = 16.0
+offset_right = -20.0
+offset_bottom = 240.0
+alignment = 1
+theme_override_constants/separation = 6
+mouse_filter = 2

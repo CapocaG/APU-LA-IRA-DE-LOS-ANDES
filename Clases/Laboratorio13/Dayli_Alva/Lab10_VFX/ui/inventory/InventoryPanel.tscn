@@ -1,0 +1,95 @@
+[gd_scene format=3 uid="uid://3h8s6abxeecc"]
+
+[ext_resource type="Script" uid="uid://cpynfu7mn80j4" path="res://ui/inventory/inventory_panel.gd" id="1_panel"]
+
+[node name="InventoryPanel" type="Control" unique_id=1599878445]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_panel")
+
+[node name="DimBackground" type="ColorRect" parent="." unique_id=543051540]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.02, 0.03, 0.06, 0.78)
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=273853173]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer" unique_id=1361494958]
+custom_minimum_size = Vector2(760, 500)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer" unique_id=743789311]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Header" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=939246502]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/Header" unique_id=1872187366]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "INVENTORY"
+
+[node name="CloseButton" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/Header" unique_id=2104893329]
+layout_mode = 2
+text = "Close"
+
+[node name="Body" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=244443580]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 16
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CenterContainer/PanelContainer/VBoxContainer/Body" unique_id=631366102]
+custom_minimum_size = Vector2(390, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="GridContainer" type="GridContainer" parent="CenterContainer/PanelContainer/VBoxContainer/Body/ScrollContainer" unique_id=1294675484]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/h_separation = 6
+theme_override_constants/v_separation = 6
+columns = 5
+
+[node name="DetailsPanel" type="VBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer/Body" unique_id=383879406]
+custom_minimum_size = Vector2(260, 0)
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Name" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/Body/DetailsPanel" unique_id=490148094]
+layout_mode = 2
+text = "Select an item"
+
+[node name="Description" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/Body/DetailsPanel" unique_id=450181660]
+layout_mode = 2
+size_flags_vertical = 3
+autowrap_mode = 3
+
+[node name="Footer" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=1207625414]
+layout_mode = 2
+
+[node name="UseButton" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/Footer" unique_id=17457522]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Use item"

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="LevelData" format=3 uid="uid://dhuydlgmt43tu"]
+
+[ext_resource type="Script" uid="uid://bblcv5cmq0ls1" path="res://core/data/level_data.gd" id="1_level_data"]
+
+[resource]
+script = ExtResource("1_level_data")
+level_id = &"level_01"
+display_name = "Nivel 01 - AI Lab"
+scene_path = "res://scenes/levels/ai_lab.tscn"
+next_level_id = &"level_02"
