@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="LevelData" format=3 uid="uid://cls5ok8png3sx"]
+
+[ext_resource type="Script" uid="uid://bblcv5cmq0ls1" path="res://core/data/level_data.gd" id="1_level_data"]
+
+[resource]
+script = ExtResource("1_level_data")
+level_id = &"level_03"
+display_name = "Nivel 03 - VFX Lab"
+scene_path = "res://scenes/levels/vfx_lab.tscn"

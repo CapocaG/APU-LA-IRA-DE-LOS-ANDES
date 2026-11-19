@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://bw8s3y5tkr2i5"]
+
+[ext_resource type="Script" uid="uid://vm4e6lxp3mxe" path="res://scripts/vfx/fx_landing_dust.gd" id="1_mxeiu"]
+
+[sub_resource type="Gradient" id="Gradient_landing_dust"]
+colors = PackedColorArray(0.85, 0.78, 0.68, 0.85, 0.85, 0.78, 0.68, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_landing_dust"]
+gradient = SubResource("Gradient_landing_dust")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_l5qpk"]
+particle_flag_disable_z = true
+direction = Vector3(0, -2, 0)
+spread = 60.0
+initial_velocity_min = 60.0
+initial_velocity_max = 130.0
+gravity = Vector3(0, 30, 0)
+scale_min = 1.5
+scale_max = 2.5
+color_ramp = SubResource("GradientTexture1D_landing_dust")
+
+[node name="FX_LandingDust" type="Node2D" unique_id=1962386868]
+script = ExtResource("1_mxeiu")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=616961736]
+emitting = false
+amount = 16
+lifetime = 0.45
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_l5qpk")

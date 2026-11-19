@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dfyxk3yniewrq"]
+
+[ext_resource type="Script" uid="uid://cnskwtscdsovj" path="res://scripts/math_lab/ballistic_projectile.gd" id="1_r3kfj"]
+
+[node name="BallisticProjectile" type="Node2D" unique_id=242079543]
+script = ExtResource("1_r3kfj")

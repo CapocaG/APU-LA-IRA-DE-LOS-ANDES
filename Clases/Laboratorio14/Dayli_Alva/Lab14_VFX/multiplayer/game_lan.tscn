@@ -1,0 +1,52 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://multiplayer/game_lan.gd" id="1_game"]
+[ext_resource type="PackedScene" path="res://multiplayer/player_net.tscn" id="2_player"]
+
+[node name="GameLAN" type="Node2D"]
+script = ExtResource("1_game")
+
+[node name="World" type="Node2D" parent="."]
+
+[node name="SpawnPoints" type="Node2D" parent="."]
+
+[node name="Spawn1" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(500, 384)
+
+[node name="Spawn2" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(620, 384)
+
+[node name="Spawn3" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(740, 384)
+
+[node name="Spawn4" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(860, 384)
+
+[node name="Players" type="Node2D" parent="."]
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+spawn_path = NodePath("../Players")
+spawnable_scenes = Array[PackedScene]([ExtResource("2_player")])
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="StatusLabel" type="Label" parent="HUD"]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 600.0
+offset_bottom = 44.0
+text = "Sin conexión."
+
+[node name="PeerIdLabel" type="Label" parent="HUD"]
+offset_left = 16.0
+offset_top = 48.0
+offset_right = 220.0
+offset_bottom = 76.0
+text = "Peer ID: 1"
+
+[node name="RoleLabel" type="Label" parent="HUD"]
+offset_left = 16.0
+offset_top = 80.0
+offset_right = 220.0
+offset_bottom = 108.0
+text = "HOST"

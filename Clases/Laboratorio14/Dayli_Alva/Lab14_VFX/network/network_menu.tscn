@@ -1,0 +1,78 @@
+[gd_scene format=3 uid="uid://boqq0b4bg4fs7"]
+
+[ext_resource type="Script" uid="uid://dtq4rbhmjiuna" path="res://ui/network_menu.gd" id="1_menu"]
+[ext_resource type="Theme" uid="uid://dkyvwumdomucl" path="res://ui/themes/game_theme.tres" id="2_theme"]
+
+[node name="NetworkMenu" type="Control" unique_id=169344231]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_theme")
+script = ExtResource("1_menu")
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=919092392]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer" unique_id=775159969]
+custom_minimum_size = Vector2(400, 420)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer" unique_id=271142424]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Title" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=1291592103]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Multijugador LAN"
+horizontal_alignment = 1
+
+[node name="AddressInput" type="LineEdit" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=1395081366]
+custom_minimum_size = Vector2(0, 42)
+layout_mode = 2
+text = "127.0.0.1"
+placeholder_text = "IP del host (127.0.0.1 en esta PC)"
+
+[node name="HostButton" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=1156060699]
+custom_minimum_size = Vector2(0, 46)
+layout_mode = 2
+theme_type_variation = &"PrimaryButton"
+text = "Host"
+
+[node name="JoinButton" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=1707018531]
+custom_minimum_size = Vector2(0, 46)
+layout_mode = 2
+text = "Join"
+
+[node name="DisconnectButton" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=1775282046]
+custom_minimum_size = Vector2(0, 46)
+layout_mode = 2
+theme_type_variation = &"DangerButton"
+text = "Disconnect"
+
+[node name="StatusLabel" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=291383573]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+text = "Sin conexión."
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="PeerIdLabel" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=1324346259]
+visible = false
+layout_mode = 2
+text = "Peer ID: 1"
+horizontal_alignment = 1
+
+[node name="RoleLabel" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=2146543472]
+visible = false
+layout_mode = 2
+text = "HOST"
+horizontal_alignment = 1

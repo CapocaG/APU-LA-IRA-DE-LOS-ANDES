@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://1onttpdbr4g"]
+
+[ext_resource type="Script" uid="uid://16gjfgmow6dh" path="res://scripts/math_lab/orbiter.gd" id="1_2kv78"]
+[ext_resource type="Script" uid="uid://b4cvoyamueqfs" path="res://scripts/math_lab/math_lab.gd" id="1_iyr2g"]
+[ext_resource type="Script" uid="uid://bipk03847472g" path="res://scripts/math_lab/wave_trap.gd" id="2_e1eyn"]
+[ext_resource type="Script" uid="uid://bnyvk075fvurg" path="res://scripts/math_lab/camera_shake.gd" id="2_iyr2g"]
+
+[node name="MathLab" type="Node2D" unique_id=1615262022]
+script = ExtResource("1_iyr2g")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1979323859]
+position = Vector2(640, 360)
+script = ExtResource("2_iyr2g")
+
+[node name="OrbitCenter" type="Marker2D" parent="." unique_id=2050289862]
+position = Vector2(640, 260)
+
+[node name="Orbiter" type="Node2D" parent="." unique_id=282611387 node_paths=PackedStringArray("center")]
+position = Vector2(810, 260)
+script = ExtResource("1_2kv78")
+center = NodePath("../OrbitCenter")
+
+[node name="WaveTrap" type="Node2D" parent="." unique_id=708561506]
+position = Vector2(160, 500)
+script = ExtResource("2_e1eyn")
+
+[node name="LaunchPoint" type="Marker2D" parent="." unique_id=1241149496]
+position = Vector2(140, 570)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=626512453]
+
+[node name="HelpLabel" type="Label" parent="CanvasLayer" unique_id=219256636]
+offset_left = 18.0
+offset_top = 14.0
+offset_right = 325.0
+offset_bottom = 37.0
+text = "Clic izquierdo: disparar | Espacio: shake"
