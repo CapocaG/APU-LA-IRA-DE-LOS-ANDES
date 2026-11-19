@@ -55,6 +55,7 @@
 [ext_resource type="PackedScene" uid="uid://bol5sjr0tbmmd" path="res://scenes/ui/status_hud.tscn" id="48_h0s6k"]
 [ext_resource type="Texture2D" uid="uid://cteiij301v2u7" path="res://Assets/objetos/portal.png" id="50_ersds"]
 [ext_resource type="AudioStream" uid="uid://bdi087i25hutb" path="res://Assets/audio/music/fondo_1.ogg" id="52_d143n"]
+[ext_resource type="PackedScene" uid="uid://bl5fvq8cwjac5" path="res://scenes/ui/dialogue_panel.tscn" id="53_cfbos"]
 [ext_resource type="AudioStream" uid="uid://cgbmk5p5f081a" path="res://Assets/audio/music/level.ogg" id="53_kin6j"]
 [ext_resource type="PackedScene" uid="uid://ddcm3ocyea7n7" path="res://scenes/npcs/curandera_apu.tscn" id="53_mom56"]
 
@@ -1938,6 +1939,11 @@ shape = SubResource("RectangleShape2D_3c2fn")
 
 [node name="CuranderaApu" parent="." unique_id=1985306165 instance=ExtResource("53_mom56")]
 position = Vector2(-1500, -250)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=460066958]
+layer = 2
+
+[node name="DialoguePanel" parent="CanvasLayer" unique_id=1760212208 instance=ExtResource("53_cfbos")]
 
 [node name="Player" parent="." unique_id=893648857 instance=ExtResource("46_v0tij")]
 

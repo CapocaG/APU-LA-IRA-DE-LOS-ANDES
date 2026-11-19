@@ -11,6 +11,8 @@ enum State {
 	DEAD
 }
 
+
+
 @export_category("Stats")
 @export var speed: int = 480
 @export var attack_damage: int = 60
@@ -59,6 +61,26 @@ func _stop_walking_sfx() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 		attack()
+	elif event is InputEventKey and event.pressed and not event.echo:
+		match event.keycode:
+			KEY_Q:
+				PlayerData.cycle_next_available_slot()
+			KEY_R:
+				use_inventory_item(PlayerData.get_selected_item_name())
+			KEY_1, KEY_KP_1:
+				use_inventory_item("COCA")
+			KEY_2, KEY_KP_2:
+				use_inventory_item("CHICHA_DE_JORA")
+			KEY_3, KEY_KP_3:
+				use_inventory_item("FRAGMENTO_DE_ILLAPA")
+			KEY_4, KEY_KP_4:
+				use_inventory_item("QUIPU")
+			KEY_5, KEY_KP_5:
+				use_inventory_item("ILLA")
+			KEY_6, KEY_KP_6:
+				use_inventory_item("SEMILLA_DE_PACHAMAMA")
+			KEY_7, KEY_KP_7:
+				use_inventory_item("ESCAMA_DE_AMARU")
 
 func _physics_process(delta: float) -> void:
 	if state == State.DEAD:
@@ -207,45 +229,7 @@ func _on_hit_box_area_entered(area: Area2D) -> void:
 
 func apply_powerup(item_name: String) -> void:
 	_play_sfx(pickup_sfx, 0.96, 1.06)
-	match item_name:
-		"COCA":
-			heal(35)
-			restore_energy(30.0)
-		"CHICHA_DE_JORA":
-			var bonus_speed: int = int(speed * 0.35)
-			speed += bonus_speed
-			modulate = Color(1.0, 0.9, 0.55)
-			await get_tree().create_timer(8.0).timeout
-			speed -= bonus_speed
-			modulate = Color.WHITE
-		"ILLA":
-			damage_multiplier_taken = 0.5
-			modulate = Color(0.55, 0.95, 1.0)
-			await get_tree().create_timer(10.0).timeout
-			damage_multiplier_taken = 1.0
-			modulate = Color.WHITE
-		"QUIPU":
-			restore_energy(max_energy)
-			var bonus_regen: float = 10.0
-			energy_regeneration_per_second += bonus_regen
-			modulate = Color(0.85, 0.75, 1.0)
-			await get_tree().create_timer(10.0).timeout
-			energy_regeneration_per_second -= bonus_regen
-			modulate = Color.WHITE
-		"ESCAMA_DE_AMARU":
-			attack_damage += 15
-			PlayerData.bonus_damage += 15
-		"FRAGMENTO_DE_ILLAPA":
-			speed += 45
-			max_energy += 20.0
-			PlayerData.bonus_speed += 45
-			PlayerData.bonus_max_energy += 20.0
-			restore_energy(20.0)
-		"SEMILLA_DE_PACHAMAMA":
-			hitpoints_max += 30
-			hitpoints = hitpoints_max
-			PlayerData.bonus_max_hp += 30
-			_emit_stats()
+	PlayerData.add_item(item_name, 1)
 
 func load_stats_from_global() -> void:
 	attack_damage += PlayerData.bonus_damage
@@ -258,3 +242,42 @@ func save_stats_to_global() -> void:
 	PlayerData.bonus_speed = speed - 480
 	PlayerData.bonus_max_hp = hitpoints_max - 150
 	PlayerData.bonus_max_energy = max_energy - 100.0
+
+func use_inventory_item(item_name: String) -> void:
+	if state == State.DEAD or dialogue_active:
+		return
+	if not PlayerData.consume_item(item_name):
+		return
+
+	_play_sfx(pickup_sfx, 1.05, 1.15)
+	match item_name:
+		"COCA":
+			heal(35)
+			restore_energy(30.0)
+			var coca_tween := create_tween()
+			coca_tween.tween_property(self, "modulate", Color(0.6, 1.35, 0.7), 0.18)
+			coca_tween.tween_property(self, "modulate", Color.WHITE, 0.3)
+		"CHICHA_DE_JORA":
+			var bonus_speed: int = int(speed * 0.35)
+			speed += bonus_speed
+			modulate = Color(1.0, 0.9, 0.55)
+			await get_tree().create_timer(8.0).timeout
+			if is_inside_tree():
+				speed = maxi(480 + PlayerData.bonus_speed, speed - bonus_speed)
+				modulate = Color.WHITE
+		"ILLA":
+			damage_multiplier_taken = 0.5
+			modulate = Color(0.55, 0.95, 1.0)
+			await get_tree().create_timer(10.0).timeout
+			if is_inside_tree():
+				damage_multiplier_taken = 1.0
+				modulate = Color.WHITE
+		"QUIPU":
+			restore_energy(max_energy)
+			var bonus_regen: float = 10.0
+			energy_regeneration_per_second += bonus_regen
+			modulate = Color(0.85, 0.75, 1.0)
+			await get_tree().create_timer(10.0).timeout
+			if is_inside_tree():
+				energy_regeneration_per_second = maxf(6.0, energy_regeneration_per_second - bonus_regen)
+				modulate = Color.WHITE
