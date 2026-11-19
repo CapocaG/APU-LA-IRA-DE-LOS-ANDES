@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://3fh6rxi6027y" path="res://Assets/enemies/animations/Amaru_apu.png" id="1_pla8l"]
 [ext_resource type="PackedScene" uid="uid://bi3rlsjuwybbu" path="res://scenes/enemies/amaru_fire.tscn" id="2_1wavo"]
 [ext_resource type="PackedScene" uid="uid://dlvgaavtmqxlj" path="res://scenes/player/power_up.tscn" id="3_utkjw"]
+[ext_resource type="AudioStream" uid="uid://bblfjbiq8o68v" path="res://Assets/audio/SFX/fuego_amaru.wav" id="5_jro2t"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fdm2o"]
 radius = 30.0
@@ -271,3 +272,8 @@ theme_override_styles/background = SubResource("StyleBoxFlat_jro2t")
 theme_override_styles/fill = SubResource("StyleBoxFlat_6qdit")
 value = 100.0
 show_percentage = false
+
+[node name="FireShootSFX" type="AudioStreamPlayer2D" parent="." unique_id=1451117114]
+stream = ExtResource("5_jro2t")
+max_distance = 900.0
+bus = &"SFX"

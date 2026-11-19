@@ -17,6 +17,7 @@ signal died(exp_reward: int)
 @onready var detection_area: Area2D = $DetectionArea
 @onready var attack_timer: Timer = $AttackTimer
 @onready var health_bar: Range = $HealthBar
+@onready var fire_shoot_sfx: AudioStreamPlayer2D = get_node_or_null("FireShootSFX")
 
 @export var drop_scene: PackedScene
 @export_range(0.0, 1.0) var drop_chance: float = 0.7
@@ -129,6 +130,11 @@ func _start_melee_attack(dir: Vector2) -> void:
 func _spawn_fire() -> void:
 	if fire_scene == null or not is_instance_valid(target_player):
 		return
+
+	if is_instance_valid(fire_shoot_sfx) and fire_shoot_sfx.stream != null:
+		fire_shoot_sfx.pitch_scale = randf_range(0.92, 1.08)
+		fire_shoot_sfx.play()
+
 	var fire := fire_scene.instantiate()
 	fire.global_position = fire_point.global_position
 	fire.direction = (target_player.global_position - fire_point.global_position).normalized()
