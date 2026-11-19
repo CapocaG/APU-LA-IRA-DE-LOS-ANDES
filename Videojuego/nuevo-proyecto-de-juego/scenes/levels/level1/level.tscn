@@ -31,9 +31,12 @@
 [ext_resource type="Texture2D" uid="uid://es2l6o6lkagf" path="res://Assets/casas/Castle_Destroyed.png" id="16_cqqhe"]
 [ext_resource type="Texture2D" uid="uid://c62mjj7bp0loc" path="res://Assets/objetos/oso.png" id="17_t51ir"]
 [ext_resource type="Texture2D" uid="uid://ci8lujfj25te5" path="res://Assets/casas/Goblin_House_Destroyed.png" id="17_yoh1m"]
+[ext_resource type="AudioStream" uid="uid://j2ig0gfqqviu" path="res://Assets/audio/SFX/pato.wav" id="18_1j70i"]
 [ext_resource type="Texture2D" uid="uid://tk03xxrk568h" path="res://Assets/objetos/vicuña.png" id="18_hfr1v"]
 [ext_resource type="Texture2D" uid="uid://jvrtgjsljkls" path="res://Assets/casas/GoldMine_Destroyed.png" id="18_u5w0m"]
 [ext_resource type="Texture2D" uid="uid://dfiljbefft2bf" path="res://Assets/casas/GoldMine_Inactive.png" id="19_fhw5o"]
+[ext_resource type="AudioStream" uid="uid://dm0vlr3v521b0" path="res://Assets/audio/SFX/oso.wav" id="19_mom56"]
+[ext_resource type="AudioStream" uid="uid://vi73x74h4mm2" path="res://Assets/audio/SFX/oveja.wav" id="20_cfbos"]
 [ext_resource type="Texture2D" uid="uid://bhw4n1nvwsd8s" path="res://Assets/casas/House1.png" id="20_xm880"]
 [ext_resource type="Texture2D" uid="uid://dd7og3qnq8qol" path="res://Assets/casas/House2.png" id="21_vfold"]
 [ext_resource type="Texture2D" uid="uid://ds8o2a8d23wne" path="res://Assets/casas/Tower_Construction.png" id="22_87pmf"]
@@ -53,6 +56,7 @@
 [ext_resource type="Texture2D" uid="uid://cteiij301v2u7" path="res://Assets/objetos/portal.png" id="50_ersds"]
 [ext_resource type="AudioStream" uid="uid://bdi087i25hutb" path="res://Assets/audio/music/fondo_1.ogg" id="52_d143n"]
 [ext_resource type="AudioStream" uid="uid://cgbmk5p5f081a" path="res://Assets/audio/music/level.ogg" id="53_kin6j"]
+[ext_resource type="PackedScene" uid="uid://ddcm3ocyea7n7" path="res://scenes/npcs/curandera_apu.tscn" id="53_mom56"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_i166f"]
 texture = ExtResource("1_nbgty")
@@ -1802,6 +1806,14 @@ tile_map_data = PackedByteArray("AAAHAAUAAAABAAEAAAAHAAQAAAABAAEAAAAHAAMAAAABAAE
 tile_set = SubResource("TileSet_fdm2o")
 
 [node name="WaterAudio" type="AudioStreamPlayer2D" parent="." unique_id=221327217]
+position = Vector2(600, 0)
+stream = ExtResource("52_d143n")
+autoplay = true
+max_distance = 450.0
+bus = &"SFX"
+
+[node name="WaterAudio2" type="AudioStreamPlayer2D" parent="." unique_id=800336889]
+position = Vector2(1150, 420)
 stream = ExtResource("52_d143n")
 autoplay = true
 max_distance = 450.0
@@ -1835,6 +1847,55 @@ tile_set = SubResource("TileSet_osicj")
 [node name="Puentes" type="TileMapLayer" parent="." unique_id=1750490164]
 tile_map_data = PackedByteArray("AAAGAP//AQAAAAAAAAAGAAAAAQAAAAEAAAAHAAAAAQABAAEAAAAIAAAAAQADAAEAAAAJAAAAAQACAAEAAAAKAAAAAQAEAAEAAAALAAAAAQAFAAEAAAALAP//AQAFAAAAAAAJAP//AQADAAAAAAAIAP//AQADAAAAAAAHAP//AQABAAAAAAAKAP//AQAEAAAAAAARAAQAAQAAAAIAAAASAAQAAQABAAIAAAASAAUAAQABAAMAAAARAAUAAQAAAAMAAAASAAYAAQABAAUAAAARAAYAAQAAAAMAAAASAAcAAQABAAYAAAARAAcAAQAAAAYAAAARAAgAAQAAAAcAAAASAAgAAQABAAcAAADp//T/AQAAAAAAAADp//X/AQAAAAEAAADq//X/AQABAAEAAADq//T/AQABAAAAAADr//X/AQACAAEAAADr//T/AQADAAAAAADs//T/AQACAAAAAADs//X/AQACAAEAAADt//T/AQACAAAAAADt//X/AQADAAEAAADu//T/AQADAAAAAADu//X/AQACAAEAAADv//T/AQACAAAAAADv//X/AQADAAEAAADw//X/AQADAAEAAADw//T/AQACAAAAAADx//T/AQAEAAAAAADy//T/AQAFAAAAAADx//X/AQAEAAEAAADy//X/AQAFAAEAAAA=")
 tile_set = SubResource("TileSet_yliq7")
+
+[node name="DuckAudio" type="AudioStreamPlayer2D" parent="." unique_id=482597092]
+position = Vector2(358, -160)
+stream = ExtResource("18_1j70i")
+autoplay = true
+max_distance = 450.0
+bus = &"SFX"
+
+[node name="DuckAudio2" type="AudioStreamPlayer2D" parent="." unique_id=1861235935]
+position = Vector2(225, -724)
+stream = ExtResource("18_1j70i")
+autoplay = true
+max_distance = 450.0
+bus = &"SFX"
+
+[node name="DuckAudio3" type="AudioStreamPlayer2D" parent="." unique_id=1559749504]
+position = Vector2(1312, 494)
+stream = ExtResource("18_1j70i")
+autoplay = true
+max_distance = 450.0
+bus = &"SFX"
+
+[node name="BearAudio" type="AudioStreamPlayer2D" parent="." unique_id=974318268]
+position = Vector2(-715, -759)
+stream = ExtResource("19_mom56")
+autoplay = true
+max_distance = 450.0
+bus = &"SFX"
+
+[node name="BearAudio2" type="AudioStreamPlayer2D" parent="." unique_id=355332656]
+position = Vector2(922, -763)
+stream = ExtResource("19_mom56")
+autoplay = true
+max_distance = 450.0
+bus = &"SFX"
+
+[node name="SheepAudio" type="AudioStreamPlayer2D" parent="." unique_id=1484799654]
+position = Vector2(615, 720)
+stream = ExtResource("20_cfbos")
+autoplay = true
+max_distance = 450.0
+bus = &"SFX"
+
+[node name="SheepAudio2" type="AudioStreamPlayer2D" parent="." unique_id=1620535859]
+position = Vector2(-1698, 732)
+stream = ExtResource("20_cfbos")
+autoplay = true
+max_distance = 450.0
+bus = &"SFX"
 
 [node name="Entornos" type="TileMapLayer" parent="." unique_id=1467457187]
 y_sort_enabled = true
@@ -1875,6 +1936,9 @@ shape = SubResource("RectangleShape2D_fdm2o")
 position = Vector2(595.5, -310.5)
 shape = SubResource("RectangleShape2D_3c2fn")
 
+[node name="CuranderaApu" parent="." unique_id=1985306165 instance=ExtResource("53_mom56")]
+position = Vector2(-1500, -250)
+
 [node name="Player" parent="." unique_id=893648857 instance=ExtResource("46_v0tij")]
 
 [node name="Enemies" type="Node2D" parent="." unique_id=668813253]
@@ -1894,8 +1958,8 @@ position = Vector2(1163, -276)
 [node name="StatusHUD" parent="HealthCanvas" unique_id=618409305 instance=ExtResource("48_h0s6k")]
 
 [node name="LevelMusic" type="AudioStreamPlayer2D" parent="." unique_id=1030024720]
+position = Vector2(-246, -46)
 stream = ExtResource("53_kin6j")
 volume_db = -6.0
 autoplay = true
-max_distance = 450.0
 bus = &"Music"
